@@ -185,6 +185,8 @@ define('Mobile/SalesLogix/Views/Contact/Detail', [
                             property: 'WorkPhone',
                             label: this.callWorkNumberText,
                             icon: 'content/images/icons/Dial_24x24.png',
+                            iconWidth: 24,
+                            iconHeight: 24,
                             action: 'callWorkPhone',
                             disabled: this.checkValueExists,
                             renderer: format.phone.bindDelegate(this, false)
@@ -201,12 +203,16 @@ define('Mobile/SalesLogix/Views/Contact/Detail', [
                             property: 'Email',
                             label: this.sendEmailText,
                             icon: 'content/images/icons/Send_Write_email_24x24.png',
+                            iconWidth: 24,
+                            iconHeight: 24,
                             action: 'sendEmail',
                             disabled: this.checkValueExists
                         }, {
                             name: 'ScheduleActivityAction',
                             label: this.scheduleActivityText,
                             icon: 'content/images/icons/Schedule_ToDo_24x24.png',
+                            iconWidth: 24,
+                            iconHeight: 24,
                             action: 'scheduleActivity',
                             tpl: new Simplate([
                                 '{%: $.AccountName %} / {%: $.NameLF %}'
@@ -216,6 +222,8 @@ define('Mobile/SalesLogix/Views/Contact/Detail', [
                             property: 'NameLF',
                             label: this.addNoteText,
                             icon: 'content/images/icons/New_Note_24x24.png',
+                            iconWidth: 24,
+                            iconHeight: 24,
                             action: 'addNote'
                         }, {
                             name: 'ViewAddressAction',
@@ -291,6 +299,8 @@ define('Mobile/SalesLogix/Views/Contact/Detail', [
                         }, {
                             name: 'OpportunityRelated',
                             icon: 'content/images/icons/opportunity_24.png',
+                            iconWidth: 24,
+                            iconHeight: 24,
                             label: this.relatedOpportunitiesText,
                             view: 'opportunity_related',
                             where: this.formatRelatedQuery.bindDelegate(this, 'Contacts.Contact.Id eq "${0}"')
@@ -315,6 +325,8 @@ define('Mobile/SalesLogix/Views/Contact/Detail', [
                         }, {
                             name: 'AttachmentRelated',
                             icon: 'content/images/icons/Attachment_24.png',
+                            iconWidth: 24,
+                            iconHeight: 24,
                             label: this.relatedAttachmentText,
                             where: this.formatRelatedQuery.bindDelegate(this, 'ContactId eq "${0}"'),
                             view: 'contact_attachment_related',

@@ -233,6 +233,8 @@ define('Mobile/SalesLogix/Views/TicketActivity/Detail', [
                     children: [{
                         name: 'TicketActivityItemRelated',
                         icon: 'content/images/icons/product_24.png',
+                        iconWidth: 24,
+                        iconHeight: 22,
                         label: this.relatedTicketActivityItemText,
                         where: this.formatRelatedQuery.bindDelegate(this, 'TicketActivity.Id eq "${0}"'),
                         view: 'ticketactivityitem_related'

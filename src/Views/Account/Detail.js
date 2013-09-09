@@ -197,6 +197,8 @@ define('Mobile/SalesLogix/Views/Account/Detail', [
                             property: 'MainPhone',
                             label: this.callMainNumberText,
                             icon: 'content/images/icons/Dial_24x24.png',
+                            iconWidth: 24,
+                            iconHeight: 24,
                             action: 'callMainPhone',
                             disabled: this.checkMainPhone,
                             renderer: format.phone.bindDelegate(this, false)
@@ -205,12 +207,16 @@ define('Mobile/SalesLogix/Views/Account/Detail', [
                             property: 'AccountName',
                             label: this.scheduleActivityText,
                             icon: 'content/images/icons/Schedule_ToDo_24x24.png',
+                            iconWidth: 24,
+                            iconHeight: 24,
                             action: 'scheduleActivity'
                         }, {
                             name: 'AddNoteAction',
                             property: 'AccountName',
                             label: this.addNoteText,
                             icon: 'content/images/icons/New_Note_24x24.png',
+                            iconWidth: 24,
+                            iconHeight: 24,
                             action: 'addNote'
                         }, {
                             name: 'ViewAddressAction',
@@ -292,12 +298,16 @@ define('Mobile/SalesLogix/Views/Account/Detail', [
                         }, {
                             name: 'ContactRelated',
                             icon: 'content/images/icons/Contacts_24x24.png',
+                            iconWidth: 24,
+                            iconHeight: 24,
                             label: this.relatedContactsText,
                             where: this.formatRelatedQuery.bindDelegate(this, 'Account.id eq "${0}"'),
                             view: 'contact_related'
                         }, {
                             name: 'OpportunityRelated',
                             icon: 'content/images/icons/opportunity_24.png',
+                            iconWidth: 24,
+                            iconHeight: 24,
                             label: this.relatedOpportunitiesText,
                             where: this.formatRelatedQuery.bindDelegate(this, 'Account.id eq "${0}"'),
                             view: 'opportunity_related'
@@ -322,6 +332,10 @@ define('Mobile/SalesLogix/Views/Account/Detail', [
                         }, {
                             name: 'AttachmentRelated',
                             icon: 'content/images/icons/Attachment_24.png',
+                            iconWidth: 24,
+                            iconHeight: 24,
+                            iconWidth: 24,
+                            iconHeight: 24,
                             label: this.relatedAttachmentText,
                             where: this.formatRelatedQuery.bindDelegate(this, 'AccountId eq "${0}"'),
                             view: 'account_attachment_related',

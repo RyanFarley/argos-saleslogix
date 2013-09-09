@@ -387,6 +387,8 @@ define('Mobile/SalesLogix/Views/Activity/List', [
            return this.actions || (this.actions = [{
                id: 'complete',
                icon: 'content/images/icons/Clear_Activity_24x24.png',
+               iconWidth: 24,
+               iconHeight: 24,
                label: this.completeActivityText,
                enabled: function(action, selection) {
                    var recur, entry = selection && selection.data;
@@ -415,6 +417,8 @@ define('Mobile/SalesLogix/Views/Activity/List', [
            }, {
                id: 'call',
                icon: 'content/images/icons/Dial_24x24.png',
+               iconWidth: 24,
+               iconHeight: 24,
                label: this.callText,
                enabled: function(action, selection) {
                    var entry;
@@ -434,6 +438,8 @@ define('Mobile/SalesLogix/Views/Activity/List', [
            }, {
                id: 'addAttachment',
                icon: 'content/images/icons/Attachment_24.png',
+               iconWidth: 24,
+               iconHeight: 24,
                label: this.addAttachmentActionText,
                fn: action.addAttachment.bindDelegate(this)
            }]

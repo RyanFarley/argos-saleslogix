@@ -473,6 +473,8 @@ define('Mobile/SalesLogix/Views/Activity/Detail', [
                     children: [{
                         name: 'AttachmentRelated',
                         icon: 'content/images/icons/Attachment_24.png',
+                        iconWidth: 24,
+                        iconHeight: 24,
                         label: this.relatedAttachmentText,
                         where: this.formatRelatedQuery.bindDelegate(this, 'ActivityId eq "${0}"','activityId'),
                         view: 'activity_attachment_related',

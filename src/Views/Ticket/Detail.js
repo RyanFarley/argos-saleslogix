@@ -146,6 +146,8 @@ define('Mobile/SalesLogix/Views/Ticket/Detail', [
                         property: 'TicketNumber',
                         label: this.scheduleActivityText,
                         icon: 'content/images/icons/Schedule_ToDo_24x24.png',
+                        iconWidth: 24,
+                        iconHeight: 24,
                         action: 'scheduleActivity'
                     }]
                 }, {
@@ -258,6 +260,8 @@ define('Mobile/SalesLogix/Views/Ticket/Detail', [
                         }, {
                             name: 'AttachmentRelated',
                             icon: 'content/images/icons/Attachment_24.png',
+                            iconWidth: 24,
+                            iconHeight: 24,
                             label: this.relatedAttachmentText,
                             where: this.formatRelatedQuery.bindDelegate(this, 'TicketId eq "${0}"'),
                             view: 'ticket_attachment_related',

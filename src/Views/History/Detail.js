@@ -257,6 +257,8 @@ define('Mobile/SalesLogix/Views/History/Detail', [
                     children: [{
                         name: 'AttachmentRelated',
                         icon: 'content/images/icons/Attachment_24.png',
+                        iconWidth: 24,
+                        iconHeight: 24,
                         label: this.relatedAttachmentText,
                         where: this.formatRelatedQuery.bindDelegate(this, 'HistoryId eq "${0}"'),
                         view: 'history_attachment_related',

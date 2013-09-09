@@ -210,6 +210,8 @@ define('Mobile/SalesLogix/Views/Activity/MyList', [
             return this.actions || (this.actions = [{
                 id: 'viewAccount',
                 icon: 'content/images/icons/Company_24.png',
+                iconWidth: 24,
+                iconHeight: 24,
                 label: this.viewAccountActionText,
                 enabled: function(action, selection) {
                     var entry = selection && selection.data;
@@ -235,6 +237,8 @@ define('Mobile/SalesLogix/Views/Activity/MyList', [
             }, {
                 id: 'viewOpportunity',
                 icon: 'content/images/icons/opportunity_24.png',
+                iconWidth: 24,
+                iconHeight: 24,
                 label: this.viewOpportunityActionText,
                 enabled: function(action, selection) {
                     var entry = selection && selection.data;
@@ -260,12 +264,16 @@ define('Mobile/SalesLogix/Views/Activity/MyList', [
             }, {
                 id: 'viewContact',
                 icon: 'content/images/icons/Contacts_24x24.png',
+                iconWidth: 24,
+                iconHeight: 24,
                 label: this.viewContactActionText,
                 action: 'navigateToContactOrLead',
                 enabled: this.hasContactOrLead
             }, {
                 id: 'complete',
                 icon: 'content/images/icons/Clear_Activity_24x24.png',
+                iconWidth: 24,
+                iconHeight: 24,
                 label: this.completeActivityText,
                 enabled: function(action, selection) {
                     var recur, entry = selection && selection.data;
@@ -292,6 +300,8 @@ define('Mobile/SalesLogix/Views/Activity/MyList', [
             }, {
                 id: 'accept',
                 icon: 'content/images/icons/OK_24.png',
+                iconWidth: 24,
+                iconHeight: 24,
                 label: this.acceptActivityText,
                 enabled: function(action, selection) {
                     var entry = selection && selection.data;
@@ -312,6 +322,8 @@ define('Mobile/SalesLogix/Views/Activity/MyList', [
             }, {
                 id: 'decline',
                 icon: 'content/images/icons/cancl_24.png',
+                iconWidth: 24,
+                iconHeight: 24,
                 label: this.declineActivityText,
                 enabled: function(action, selection) {
                     var entry = selection && selection.data;
@@ -331,6 +343,8 @@ define('Mobile/SalesLogix/Views/Activity/MyList', [
             }, {
                 id: 'call',
                 icon: 'content/images/icons/Dial_24x24.png',
+                iconWidth: 24,
+                iconHeight: 24,
                 label: this.callText,
                 enabled: function(action, selection) {
                     var entry;
@@ -350,6 +364,8 @@ define('Mobile/SalesLogix/Views/Activity/MyList', [
             }, {
                 id: 'addAttachment',
                 icon: 'content/images/icons/Attachment_24.png',
+                iconWidth: 24,
+                iconHeight: 24,
                 label: this.addAttachmentActionText,
                 fn: action.addAttachment.bindDelegate(this)
             }]

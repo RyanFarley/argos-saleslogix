@@ -83,6 +83,8 @@ define('Mobile/SalesLogix/Views/ErrorLog/Detail', [
                     id: 'generateEmail',
                     action: 'constructReport',
                     icon: 'content/images/icons/Send_Write_email_24x24.png',
+                    iconWidth: 24,
+                    iconHeight: 24,
                     title: 'Generate Email Report'
                 });
             }

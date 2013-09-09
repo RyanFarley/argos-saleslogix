@@ -117,11 +117,15 @@ define('Mobile/SalesLogix/Views/Contact/List', [
             return this.actions || (this.actions = [{
                         id: 'edit',
                         icon: 'content/images/icons/edit_24.png',
+                        iconWidth: 16,
+                        iconHeight: 21,
                         label: this.editActionText,
                         action: 'navigateToEditView'
                     }, {
                         id: 'callWork',
                         icon: 'content/images/icons/Call_24x24.png',
+                        iconWidth: 24,
+                        iconHeight: 24,
                         label: this.callWorkActionText,
                         enabled: action.hasProperty.bindDelegate(this, 'WorkPhone'),
                         fn: action.callPhone.bindDelegate(this, 'WorkPhone')
@@ -134,6 +138,8 @@ define('Mobile/SalesLogix/Views/Contact/List', [
                     }, {
                         id: 'viewAccount',
                         icon: 'content/images/icons/Company_24.png',
+                        iconWidth: 24,
+                        iconHeight: 24,
                         label: this.viewAccountActionText,
                         enabled: action.hasProperty.bindDelegate(this, 'Account.$key'),
                         fn: action.navigateToEntity.bindDelegate(this, {
@@ -144,22 +150,30 @@ define('Mobile/SalesLogix/Views/Contact/List', [
                     }, {
                         id: 'sendEmail',
                         icon: 'content/images/icons/Send_Write_email_24x24.png',
+                        iconWidth: 24,
+                        iconHeight: 24,
                         label: this.sendEmailActionText,
                         enabled: action.hasProperty.bindDelegate(this, 'Email'),
                         fn: action.sendEmail.bindDelegate(this, 'Email')
                     }, {
                         id: 'addNote',
                         icon: 'content/images/icons/New_Note_24x24.png',
+                        iconWidth: 24,
+                        iconHeight: 24,
                         label: this.addNoteActionText,
                         fn: action.addNote.bindDelegate(this)
                     }, {
                         id: 'addActivity',
                         icon: 'content/images/icons/Schedule_ToDo_24x24.png',
+                        iconWidth: 24,
+                        iconHeight: 24,
                         label: this.addActivityActionText,
                         fn: action.addActivity.bindDelegate(this)
                     }, {
                         id: 'addAttachment',
                         icon: 'content/images/icons/Attachment_24.png',
+                        iconWidth: 24,
+                        iconHeight: 24,
                         label: this.addAttachmentActionText,
                         fn: action.addAttachment.bindDelegate(this)
                     }]

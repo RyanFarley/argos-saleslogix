@@ -178,6 +178,8 @@ define('Mobile/SalesLogix/Views/Lead/Detail', [
                             property: 'WorkPhone',
                             label: this.callWorkNumberText,
                             icon: 'content/images/icons/Dial_24x24.png',
+                            iconWidth: 24,
+                            iconHeight: 24,
                             action: 'callWorkPhone',
                             disabled: this.checkWorkPhone,
                             renderer: format.phone.bindDelegate(this, false)
@@ -186,12 +188,16 @@ define('Mobile/SalesLogix/Views/Lead/Detail', [
                             property: 'Email',
                             label: this.sendEmailText,
                             icon: 'content/images/icons/Send_Write_email_24x24.png',
+                            iconWidth: 24,
+                            iconHeight: 24,
                             action: 'sendEmail',
                             disabled: this.checkEmail
                         }, {
                             name: 'ScheduleActivityAction',
                             label: this.scheduleActivityText,
                             icon: 'content/images/icons/Schedule_ToDo_24x24.png',
+                            iconWidth: 24,
+                            iconHeight: 24,
                             action: 'scheduleActivity',
                             tpl: new Simplate([
                                 '{%: $.Company %} / {%: $.LeadNameLastFirst %}'
@@ -201,6 +207,8 @@ define('Mobile/SalesLogix/Views/Lead/Detail', [
                             property: 'LeadNameLastFirst',
                             label: this.addNoteText,
                             icon: 'content/images/icons/New_Note_24x24.png',
+                            iconWidth: 24,
+                            iconHeight: 24,
                             action: 'addNote'
                         }, {
                             name: 'ViewAddressAction',
@@ -290,6 +298,8 @@ define('Mobile/SalesLogix/Views/Lead/Detail', [
                         }, {
                             name: 'AttachmentRelated',
                             icon: 'content/images/icons/Attachment_24.png',
+                            iconWidth: 24,
+                            iconHeight: 24,
                             label: this.relatedAttachmentText,
                             where: this.formatRelatedQuery.bindDelegate(this, 'LeadId eq "${0}"'),
                             view: 'lead_attachment_related',

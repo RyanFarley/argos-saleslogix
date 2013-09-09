@@ -171,12 +171,16 @@ define('Mobile/SalesLogix/Views/Opportunity/Detail', [
                         property: 'Description',
                         label: this.scheduleActivityText,
                         icon: 'content/images/icons/Schedule_ToDo_24x24.png',
+                        iconWidth: 24,
+                        iconHeight: 24,
                         action: 'scheduleActivity'
                     }, {
                         name: 'AddNoteAction',
                         property: 'Description',
                         label: this.addNoteText,
                         icon: 'content/images/icons/New_Note_24x24.png',
+                        iconWidth: 24,
+                        iconHeight: 24,
                         action: 'addNote'
                     }]
             };
@@ -279,6 +283,8 @@ define('Mobile/SalesLogix/Views/Opportunity/Detail', [
                 children: [{
                         name: 'OpportunityRelated',
                         icon: 'content/images/icons/product_24.png',
+                        iconWidth: 24,
+                        iconHeight: 22,
                         label: this.relatedProductsText,
                         view: 'opportunityproduct_related',
                         where: this.formatRelatedQuery.bindDelegate(this, 'Opportunity.Id eq "${0}"')
@@ -291,6 +297,8 @@ define('Mobile/SalesLogix/Views/Opportunity/Detail', [
                     }, {
                         name: 'ContactRelated',
                         icon: 'content/images/icons/Contacts_24x24.png',
+                        iconWidth: 24,
+                        iconHeight: 24,
                         label: this.relatedContactsText,
                         options: {
                             prefilter: this.formatAccountRelatedQuery.bindDelegate(this, 'Account.Id eq "${0}"')
@@ -306,6 +314,8 @@ define('Mobile/SalesLogix/Views/Opportunity/Detail', [
                     }, {
                         name: 'AttachmentRelated',
                         icon: 'content/images/icons/Attachment_24.png',
+                        iconWidth: 24,
+                        iconHeight: 24,
                         label: this.relatedAttachmentText,
                         where: this.formatRelatedQuery.bindDelegate(this, 'OpportunityId eq "${0}"'),
                         view: 'opportunity_attachment_related',
