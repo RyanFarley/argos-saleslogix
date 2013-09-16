@@ -265,11 +265,19 @@ define('Mobile/SalesLogix/Views/Activity/List', [
             getItemIconSource: function(entry) {
                 return this.itemIcon || this.activityIconByType[entry.Type] || this.icon || this.selectIcon;
             },        
+            getItemIconWidth: function(entry) {
+                return 48;
+            },
+            getItemIconHeight: function(entry) {
+                return 48;
+            },
             createIndicatorLayout: function() {
                 return this.itemIndicators || (this.itemIndicators = [{
                     id: 'alarm',
                     icon: 'AlarmClock_24x24.png',
                     label: 'Alarm',
+                    iconWidth: 24,
+                    iconHeight: 24,
                     onApply: function(entry, parent) {
                         this.isEnabled = parent.hasAlarm(entry);
                     }
@@ -277,6 +285,8 @@ define('Mobile/SalesLogix/Views/Activity/List', [
                     id: 'touched',
                     icon: 'Touched_24x24.png',
                     label: 'Touched',
+                    iconWidth: 24,
+                    iconHeight: 24,
                     onApply: function(entry, parent) {
                         this.isEnabled = parent.hasBeenTouched(entry);
                     }
@@ -284,6 +294,8 @@ define('Mobile/SalesLogix/Views/Activity/List', [
                     id: 'important',
                     icon: 'Bang_24x24.png',
                     label: 'Important',
+                    iconWidth: 24,
+                    iconHeight: 24,
                     onApply: function(entry, parent) {
                         this.isEnabled = parent.isImportant(entry);
                     }
@@ -291,6 +303,8 @@ define('Mobile/SalesLogix/Views/Activity/List', [
                     id: 'overdue',
                     cls: 'indicator_Important',
                     label: 'overdue',
+                    iconWidth: 24,
+                    iconHeight: 24,
                     valueText: 'overdue',
                     showIcon: false,
                     location: 'top',
@@ -301,6 +315,8 @@ define('Mobile/SalesLogix/Views/Activity/List', [
                     id: 'recurring',
                     icon: 'Recurring_24x24.png',
                     label: 'Recurring',
+                    iconWidth: 24,
+                    iconHeight: 24,
                     onApply: function(entry, parent) {
                         this.isEnabled = parent.isRecurring(entry, this);
                     }

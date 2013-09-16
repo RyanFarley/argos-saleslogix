@@ -44,13 +44,20 @@ define('Mobile/SalesLogix/Views/_CardLayoutListMixin', [
         itemIndicatorShowDisabled: true,
         currentSearchExpression: '',
         itemIndicatorTemplate: new Simplate([
-           '<span class="{%= $.cls %}" >',
+            '<span class="{%= $.cls %}" >',
                 '{% if ($.showIcon === false) { %}',
-                     '{%: $.valueText %}',
+                    '{%: $.valueText %}',
                 '{% } else { %}',
-                      '<img src="{%= $.indicatorIcon %}" alt="{%= $.label %}" />',
-                 '{% } %}',
-           '</span>'
+                    '<img src="{%= $.indicatorIcon %}" ',
+                    '{% if($.iconWidth && $.iconHeight) { %}',
+                        'width="{%: $.iconWidth %}" height="{%: $.iconHeight %}" ',
+                    '{% } %}',
+                    '{% if($.label) { %}',
+                        'alt="{%= $.label %}" ',
+                    '{% } %}',
+                    '/>',
+                '{% } %}',
+            '</span>'
         ]),
         itemExtTemplate: new Simplate([
             '<li data-dojo-attach-point="itemExtNode" class="card-item-ext-row"></li>'
@@ -71,14 +78,14 @@ define('Mobile/SalesLogix/Views/_CardLayoutListMixin', [
             '<div id="list-item-footer" class="list-item-footer">',
                 '<div>',
                     '<button data-action="selectEntry" class="footer-item-selector button ">',
-                        '<img src="content/images/icons/Down_Arrow_24x24.png" alt="Actions"></img>',
+                        '<img src="content/images/icons/Down_Arrow_24x24.png" alt="Actions" width="24" height="24"></img>',
                     '</button>',
                 '</div>',
             '</div>'
         ]),
         itemIconTemplate: new Simplate([
             '<button data-action="selectEntry" class="list-item-selector button">',
-            '<img id="list-item-image_{%: $.$key %}" src="{%: $$.getItemIconSource($) %}" alt="{%: $$.getItemIconAlt($) %}" class="icon" />',
+            '<img id="list-item-image_{%: $.$key %}" src="{%: $$.getItemIconSource($) %}" alt="{%: $$.getItemIconAlt($) %}" width="{%: $$.getItemIconWidth($) %}" height="{%: $$.getItemIconHeight($) %}" class="icon" />',
             '</button>'
         ]),
         itemRowContentTemplate: new Simplate([
@@ -148,6 +155,12 @@ define('Mobile/SalesLogix/Views/_CardLayoutListMixin', [
         getItemIconSource: function(entry) {
             return this.itemIcon || this.icon || this.selectIcon;
         },
+        getItemIconWidth: function(entry) {
+            return 48;
+        },
+        getItemIconHeight: function(entry) {
+            return 48;
+        },
         getItemIconAlt: function(entry) {
             return this.itemIconAltText;
         },
@@ -201,7 +214,6 @@ define('Mobile/SalesLogix/Views/_CardLayoutListMixin', [
             }
         },
         onApplyRowTemplate: function(entry, rowNode) {
-
             this.applyRowIndicators(entry, rowNode);
 
         },
@@ -221,6 +233,8 @@ define('Mobile/SalesLogix/Views/_CardLayoutListMixin', [
             return this.itemIndicators || (this.itemIndicators = [{
                 id: 'touched',
                 icon: 'Touched_24x24.png',
+                iconWidth: 24,
+                iconHeight: 24,
                 label: 'Touched',
                 onApply: function(entry, parent) {
                     this.isEnabled = parent.hasBeenTouched(entry);
