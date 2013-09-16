@@ -3,6 +3,7 @@
  */
 define('Mobile/SalesLogix/Views/Activity/List', [
     'dojo/_base/declare',
+    'dojo/_base/connect',
     'dojo/string',
     'dojo/query',
     'dojo/dom-class',
@@ -15,9 +16,11 @@ define('Mobile/SalesLogix/Views/Activity/List', [
     'Sage/Platform/Mobile/Convert',
     'Mobile/SalesLogix/Action',
     'Mobile/SalesLogix/Environment',
+    'Sage/Platform/Mobile/ErrorManager',
     'moment'
 ], function(
     declare,
+    connect,
     string,
     query,
     domClass,
@@ -30,6 +33,7 @@ define('Mobile/SalesLogix/Views/Activity/List', [
     convert,
     action,
     environment,
+    ErrorManager,
     moment
 ) {
 
@@ -477,7 +481,7 @@ define('Mobile/SalesLogix/Views/Activity/List', [
            }
        },
        completeActivity: function(entry) {
-           var completeActivity, request;
+           var completeActivity, request, completeActivityEntry;
 
            completeActivityEntry = {
                "$name": "ActivityComplete",
