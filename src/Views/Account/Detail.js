@@ -334,8 +334,6 @@ define('Mobile/SalesLogix/Views/Account/Detail', [
                             icon: 'content/images/icons/Attachment_24.png',
                             iconWidth: 24,
                             iconHeight: 24,
-                            iconWidth: 24,
-                            iconHeight: 24,
                             label: this.relatedAttachmentText,
                             where: this.formatRelatedQuery.bindDelegate(this, 'AccountId eq "${0}"'),
                             view: 'account_attachment_related',
