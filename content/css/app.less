@@ -1452,9 +1452,10 @@ td.entry-table-description {
 
     .list-action-selected
     {
-        + .actions-row
+        > .actions-row
         {
             display: block !important;
+            margin-left: 20px;
         }
 
         > .list-item-selector
@@ -1565,22 +1566,6 @@ td.entry-table-description {
         margin: 5px 0 0;
     }
 
-    .list-action-selected
-    {
-        .footer-item-selector
-        {
-            background-image: none !important;
-            border-color: transparent transparent #AAAAAA;
-            border-style: solid;
-            border-width: 0 13px 44px;
-            .box-shadow(none) !important;
-            height: 0 !important;
-            left: 0;
-            top: 18px;
-            width: 0;
-        }
-    }
-
     .footer-item-selector
     {
         border: 0px none #000000;
@@ -1591,22 +1576,6 @@ td.entry-table-description {
         top: 0;
         width: 28px;
         z-index: 10;
-    }
-
-    .list-action-selected
-    {
-        .footer-item-selector
-        { 
-            > img
-            {
-                border: 0 none black;
-                height: 24px;
-                left: -13px !important;
-                position: relative !important;
-                top: 0px !important;
-                width: 24px;
-            }
-        }
     }
 
     .list-item-footer

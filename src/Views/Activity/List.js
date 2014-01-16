@@ -66,7 +66,7 @@ define('Mobile/SalesLogix/Views/Activity/List', [
         ]),
         //Used if Card View is not mixed in
         rowTemplate: new Simplate([
-            '<li data-action="activateEntry" data-key="{%= $.$key %}" data-descriptor="{%: $.$descriptor %}" data-activity-type="{%: $.Type %}">',
+            '<li data-action="activateEntry" data-key="{%= $.$key %}" data-descriptor="{%: $.$descriptor %}" data-activity-type="{%: $.Type %}" class="col-md-6">',
                 '<div class="list-item-static-selector">',
                     '<img src="{%= $$.activityIconByType[$.Type] || $$.icon || $$.selectIcon %}" class="icon" />',
                 '</div>',

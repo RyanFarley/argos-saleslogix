@@ -63,7 +63,7 @@ define('Mobile/SalesLogix/Views/_CardLayoutListMixin', [
            ' </div>'
         ]),
         itemRowContainerTemplate: new Simplate([
-        '<li data-action="activateEntry" data-key="{%= $$.getItemActionKey($) %}" data-descriptor="{%: $$.getItemDescriptor($) %}"  data-color-class="{%: $$.getItemColorClass($) %}" >',
+        '<li class="col-md-4" data-action="activateEntry" data-key="{%= $$.getItemActionKey($) %}" data-descriptor="{%: $$.getItemDescriptor($) %}"  data-color-class="{%: $$.getItemColorClass($) %}" >',
             '{%! $$.itemRowContentTemplate %}',
         '</li>'
         ]),
@@ -100,7 +100,7 @@ define('Mobile/SalesLogix/Views/_CardLayoutListMixin', [
              '{%! $$.itemRowContainerTemplate %}'
             ]);
             this.listActionTemplate = new Simplate([
-                '<li data-dojo-attach-point="actionsNode" class="card-layout actions-row  {%: $$.itemColorClass %}"></li>'
+                '<div data-dojo-attach-point="actionsNode" class="card-layout actions-row  {%: $$.itemColorClass %}"></div>',
             ]);
             this.createIndicatorLayout();
         },

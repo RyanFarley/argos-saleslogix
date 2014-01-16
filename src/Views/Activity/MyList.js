@@ -40,7 +40,7 @@ define('Mobile/SalesLogix/Views/Activity/MyList', [
         //Templates
         //Card View 
        itemRowContainerTemplate: new Simplate([
-           '<li data-action="activateEntry" data-my-activity-key="{%= $.$key %}" data-key="{%= $$.getItemActionKey($) %}" data-descriptor="{%: $$.getItemDescriptor($) %}" data-activity-type="{%: $.Activity.Type %}"  data-color-class="{%: $$.getItemColorClass($) %}" >',
+           '<li class="col-md-4" data-action="activateEntry" data-my-activity-key="{%= $.$key %}" data-key="{%= $$.getItemActionKey($) %}" data-descriptor="{%: $$.getItemDescriptor($) %}" data-activity-type="{%: $.Activity.Type %}"  data-color-class="{%: $$.getItemColorClass($) %}" >',
             '{%! $$.itemRowContentTemplate %}',
           '</li>'
         ]),
