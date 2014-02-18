@@ -1,4 +1,4 @@
-module.exports = function(grunt) { 
+module.exports = function(grunt) {
     grunt.initConfig({
         jshint: {
             options: {
@@ -42,9 +42,30 @@ module.exports = function(grunt) {
                 }
             }
         },
+        coffee: {
+            options: {
+                sourceMap: true,
+                bare: true
+            },
+            glob_to_multiple: {
+                expand: true,
+                flatten: true,
+                cwd: 'src-coffee',
+                src: ['*.coffee'],
+                dest: 'src',
+                ext: '.js'
+            }
+        },
         watch: {
             options: {
                 livereload: true
+            },
+            coffee: {
+                options: {
+                    livereload: false
+                },
+                files: ['src-coffee/**/*.coffee'],
+                tasks: ['coffee']
             },
             scripts: {
                 files: ['src/**/*.js', 'configuration/**/*.js', '../../argos-sdk/src/**/*.js'],
@@ -65,12 +86,13 @@ module.exports = function(grunt) {
             }
         }
     });
-    
+
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-coffee');
 
     grunt.registerTask('test', ['connect', 'jasmine']);
     grunt.registerTask('default', ['test']);
