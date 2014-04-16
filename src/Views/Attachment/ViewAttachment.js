@@ -60,6 +60,7 @@ define('Mobile/SalesLogix/Views/Attachment/ViewAttachment', [
         attachDateText: 'attachment date',
         fileSizeText: 'file size',
         userText: 'user',
+        newWindowText: 'Open in new window',
         attachmentNotSupportedText: 'The attachment type is not supported for viewing.',
         attachmentDateFormatText: 'ddd M/D/YYYY h:mm a',
         downloadingText:'Downloading attachment ...',
@@ -94,7 +95,8 @@ define('Mobile/SalesLogix/Views/Attachment/ViewAttachment', [
                '<label>{%= $.description + " (" + $.fileType + ")"  %}</label>',
             '</div>',
             '<div class="attachment-viewer-area">',
-                   '<iframe id="attachment-Iframe" src="{%= $.url %}"></iframe>',
+                '<button class="button" data-action="openNewWindow">{%: $$.newWindowText %}</button>',
+                '<iframe id="attachment-Iframe" src="{%= $.url %}"></iframe>',
             '</div>'
         ]),
         attachmentViewImageTemplate: new Simplate([
@@ -165,6 +167,11 @@ define('Mobile/SalesLogix/Views/Attachment/ViewAttachment', [
         },
         createLayout: function() {
              return this.tools || (this.tools = []);
+        },
+        openNewWindow: function() {
+            if (this.dataURL) {
+                window.open(this.dataURL);
+            }
         },
         _loadAttachmentView: function(entry) {
             var data, am, isFile, url, viewNode, tpl, dl, description, attachmentid,fileType, self, iframe;
@@ -237,18 +244,22 @@ define('Mobile/SalesLogix/Views/Attachment/ViewAttachment', [
                             domClass.add(this.domNode, 'list-loading');
                             self = this;
                             attachmentid = entry.$key;
-                            am.getAttachmentFile(attachmentid, 'arraybuffer', function(responseInfo) {
-                                var rData, url, a, dataUrl, iframe;
+                            am.getAttachmentFile(attachmentid, 'blob', function(responseInfo) {
+                                var rData, url, a, iframe, blob, fn;
 
-                                rData = Utility.base64ArrayBuffer(responseInfo.response);
-                                dataUrl = 'data:' + responseInfo.contentType + ';base64,' + rData;
+                                blob = new Blob([responseInfo.response], {type: responseInfo.contentType});
+
+                                fn = URL.createObjectURL || URL.webkitURL;
+                                self.dataURL = fn.call(this, blob);
+
                                 domClass.add(dl, 'display-none');
                                 iframe = dom.byId('attachment-Iframe');
                                 iframe.onload = function() {
                                     domClass.add(dl, 'display-none');
                                 };
+
                                 domClass.add(dl, 'display-none');
-                                domAttr.set(iframe, 'src', dataUrl);
+                                domAttr.set(iframe, 'src', self.dataURL);
                             });
                         } else { //Only view images
                             viewNode = domConstruct.place(this.attachmentViewNotSupportedTemplate.apply(entry, this), this.attachmentViewerNode, 'last');
