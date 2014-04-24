@@ -1,0 +1,438 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <ProjectGuid>{D66DE993-4122-493F-8DBF-1F266E8082C6}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <OutputPath>bin</OutputPath>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>argos_saleslogix</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>64469</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:64469/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>true</TypeScriptSourceMap>
+    <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>false</TypeScriptSourceMap>
+    <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include=".gitattributes" />
+    <Content Include=".gitignore" />
+    <Content Include="build\docs.cmd" />
+    <Content Include="build\release-template.jsb2" />
+    <Content Include="build\release.cmd" />
+    <Content Include="build\release.jsb2" />
+    <Content Include="build\release.sh" />
+    <Content Include="content\css\app.less" />
+    <Content Include="content\LICENSE.Clippy" />
+    <Content Include="Gruntfile.js" />
+    <Content Include="help\help.html" />
+    <Content Include="help\help_de.html" />
+    <Content Include="help\help_fr.html" />
+    <Content Include="help\help_it.html" />
+    <Content Include="help\help_ru.html" />
+    <Content Include="index-dev.aspx" />
+    <Content Include="index-dev.html" />
+    <Content Include="index-nocache.aspx" />
+    <Content Include="index-nocache.html" />
+    <Content Include="index-phonegap.html" />
+    <Content Include="index.aspx" />
+    <Content Include="index.html" />
+    <Content Include="localization\de.js" />
+    <Content Include="localization\en-GB.js" />
+    <Content Include="localization\en.js" />
+    <Content Include="localization\exported\slx-mobile-strings-beta1-format.xml" />
+    <Content Include="localization\exported\slx-mobile-strings-beta1-text.xml" />
+    <Content Include="localization\exported\slx-mobile-strings-beta1.xml" />
+    <Content Include="localization\fr.js" />
+    <Content Include="localization\it.js" />
+    <Content Include="localization\ru.js" />
+    <Content Include="localization\saleslogix\de.js" />
+    <Content Include="localization\saleslogix\en-GB.js" />
+    <Content Include="localization\saleslogix\en.js" />
+    <Content Include="localization\saleslogix\fr.js" />
+    <Content Include="localization\saleslogix\it.js" />
+    <Content Include="localization\saleslogix\ru.js" />
+    <Content Include="min\css\app.min.css" />
+    <Content Include="min\css\app.min.debug.css" />
+    <Content Include="src-docs\guides\v2_beyond_the_guide_toolbars\toolbar-button.png" />
+    <Content Include="src-docs\guides\v2_beyond_the_guide_toolbars\toolbar-hello.png" />
+    <Content Include="src-docs\guides\v2_localization_detection\en.js" />
+    <Content Include="src-docs\guides\v2_localization_example\german_home.png" />
+    <Content Include="src-docs\guides\v2_template_guide\detail-link.png" />
+    <Content Include="src-docs\guides\v2_template_guide\detail-template.png" />
+    <Content Include="src-docs\guides\v2_template_guide\detail-view.png" />
+    <Content Include="src-docs\guides\v2_template_guide\edit-progress.png" />
+    <Content Include="src-docs\guides\v2_template_guide\edit-view-insert.png" />
+    <Content Include="src-docs\guides\v2_template_guide\edit-view.png" />
+    <Content Include="src-docs\guides\v2_template_guide\intro_home.png" />
+    <Content Include="src-docs\guides\v2_template_guide\list-home.png" />
+    <Content Include="src-docs\guides\v2_template_guide\list-trick.png" />
+    <Content Include="src-docs\guides\v2_template_guide\setup_folders.png" />
+    <Content Include="src-docs\guides\v3_scene_layout_pane\complex_multi_page.png" />
+    <Content Include="src-docs\guides\v3_scene_layout_pane\complex_single_page.png" />
+    <Content Include="src-docs\guides\v3_scene_layout_pane\scene_layout_pane_flow.png" />
+    <Content Include="src-docs\guides\v3_stores\data_store_flow.png" />
+    <Content Include="src\Action.js" />
+    <Content Include="src\Aggregate.js" />
+    <Content Include="src\Application.js" />
+    <Content Include="src\ApplicationModule.js" />
+    <Content Include="src\AttachmentManager.js" />
+    <Content Include="src\DefaultMetrics.js" />
+    <Content Include="src\Environment.js" />
+    <Content Include="src\Fields\AddressField.js" />
+    <Content Include="src\Fields\MultiCurrencyField.js" />
+    <Content Include="src\Fields\NameField.js" />
+    <Content Include="src\Fields\PicklistField.js" />
+    <Content Include="src\Fields\RecurrencesField.js" />
+    <Content Include="src\FileManager.js" />
+    <Content Include="src\Format.js" />
+    <Content Include="src\Recurrence.js" />
+    <Content Include="src\SpeedSearchWidget.js" />
+    <Content Include="src\Template.js" />
+    <Content Include="src\Utility.js" />
+    <Content Include="src\Validator.js" />
+    <Content Include="src\Views\Account\Detail.js" />
+    <Content Include="src\Views\Account\Edit.js" />
+    <Content Include="src\Views\Account\List.js" />
+    <Content Include="src\Views\Activity\Complete.js" />
+    <Content Include="src\Views\Activity\Detail.js" />
+    <Content Include="src\Views\Activity\Edit.js" />
+    <Content Include="src\Views\Activity\List.js" />
+    <Content Include="src\Views\Activity\MyList.js" />
+    <Content Include="src\Views\Activity\Recurring.js" />
+    <Content Include="src\Views\Activity\TypesList.js" />
+    <Content Include="src\Views\AddAccountContact.js" />
+    <Content Include="src\Views\Address\Edit.js" />
+    <Content Include="src\Views\Address\List.js" />
+    <Content Include="src\Views\AreaCategoryIssueLookup.js" />
+    <Content Include="src\Views\Attachment\AddAttachment.js" />
+    <Content Include="src\Views\Attachment\List.js" />
+    <Content Include="src\Views\Attachment\MyAttachmentList.js" />
+    <Content Include="src\Views\Attachment\ViewAttachment.js" />
+    <Content Include="src\Views\Calendar\DayView.js" />
+    <Content Include="src\Views\Calendar\MonthView.js" />
+    <Content Include="src\Views\Calendar\WeekView.js" />
+    <Content Include="src\Views\Charts\GenericBar.js" />
+    <Content Include="src\Views\Charts\GenericPie.js" />
+    <Content Include="src\Views\Charts\_ChartMixin.js" />
+    <Content Include="src\Views\Competitor\List.js" />
+    <Content Include="src\Views\Configure.js" />
+    <Content Include="src\Views\Contact\Detail.js" />
+    <Content Include="src\Views\Contact\Edit.js" />
+    <Content Include="src\Views\Contact\List.js" />
+    <Content Include="src\Views\Contract\List.js" />
+    <Content Include="src\Views\ErrorLog\Detail.js" />
+    <Content Include="src\Views\ErrorLog\List.js" />
+    <Content Include="src\Views\Event\Detail.js" />
+    <Content Include="src\Views\Event\Edit.js" />
+    <Content Include="src\Views\Event\List.js" />
+    <Content Include="src\Views\ExchangeRateLookup.js" />
+    <Content Include="src\Views\FooterToolbar.js" />
+    <Content Include="src\Views\Help.js" />
+    <Content Include="src\Views\History\Detail.js" />
+    <Content Include="src\Views\History\Edit.js" />
+    <Content Include="src\Views\History\List.js" />
+    <Content Include="src\Views\History\RelatedView.js" />
+    <Content Include="src\Views\Home.js" />
+    <Content Include="src\Views\LeadSource\List.js" />
+    <Content Include="src\Views\Lead\Detail.js" />
+    <Content Include="src\Views\Lead\Edit.js" />
+    <Content Include="src\Views\Lead\List.js" />
+    <Content Include="src\Views\LeftDrawer.js" />
+    <Content Include="src\Views\Login.js" />
+    <Content Include="src\Views\MainToolbar.js" />
+    <Content Include="src\Views\MetricConfigure.js" />
+    <Content Include="src\Views\MetricFilterLookup.js" />
+    <Content Include="src\Views\MetricWidget.js" />
+    <Content Include="src\Views\NameEdit.js" />
+    <Content Include="src\Views\OpportunityContact\Detail.js" />
+    <Content Include="src\Views\OpportunityContact\Edit.js" />
+    <Content Include="src\Views\OpportunityContact\List.js" />
+    <Content Include="src\Views\OpportunityProduct\Detail.js" />
+    <Content Include="src\Views\OpportunityProduct\Edit.js" />
+    <Content Include="src\Views\OpportunityProduct\List.js" />
+    <Content Include="src\Views\Opportunity\Detail.js" />
+    <Content Include="src\Views\Opportunity\Edit.js" />
+    <Content Include="src\Views\Opportunity\List.js" />
+    <Content Include="src\Views\Owner\List.js" />
+    <Content Include="src\Views\PickList.js" />
+    <Content Include="src\Views\ProductProgram\List.js" />
+    <Content Include="src\Views\Product\List.js" />
+    <Content Include="src\Views\RightDrawer.js" />
+    <Content Include="src\Views\SelectList.js" />
+    <Content Include="src\Views\Settings.js" />
+    <Content Include="src\Views\SpeedSearchList.js" />
+    <Content Include="src\Views\TextEdit.js" />
+    <Content Include="src\Views\TicketActivityItem\Detail.js" />
+    <Content Include="src\Views\TicketActivityItem\List.js" />
+    <Content Include="src\Views\TicketActivity\Detail.js" />
+    <Content Include="src\Views\TicketActivity\Edit.js" />
+    <Content Include="src\Views\TicketActivity\List.js" />
+    <Content Include="src\Views\TicketActivity\RateLookup.js" />
+    <Content Include="src\Views\Ticket\Detail.js" />
+    <Content Include="src\Views\Ticket\Edit.js" />
+    <Content Include="src\Views\Ticket\List.js" />
+    <Content Include="src\Views\Ticket\UrgencyLookup.js" />
+    <Content Include="src\Views\UpdateToolbar.js" />
+    <Content Include="src\Views\User\List.js" />
+    <Content Include="src\Views\_CardLayoutListMixin.js" />
+    <Content Include="src\Views\_MetricDetailMixin.js" />
+    <Content Include="src\Views\_MetricListMixin.js" />
+    <Content Include="src\Views\_RightDrawerBaseMixin.js" />
+    <Content Include="src\Views\_RightDrawerListMixin.js" />
+    <Content Include="src\Views\_SpeedSearchRightDrawerListMixin.js" />
+    <Content Include="tests\index.html" />
+    <Content Include="tests\src\Aggregate.spec.js" />
+    <Content Include="tests\src\all.js" />
+    <Content Include="tests\src\Application.spec.js" />
+    <Content Include="tests\src\Fields\AddressField.spec.js" />
+    <Content Include="tests\src\Fields\MultiCurrencyField.spec.js" />
+    <Content Include="tests\src\Fields\NameField.spec.js" />
+    <Content Include="tests\src\Fields\PicklistField.spec.js" />
+    <Content Include="tests\src\Fields\RecurrencesField.spec.js" />
+    <Content Include="tests\src\Format.spec.js" />
+    <Content Include="tests\src\Utility.spec.js" />
+    <Content Include="tests\src\Validator.spec.js" />
+    <Content Include="tests\src\Views\Account\List.spec.js" />
+    <Content Include="tests\src\Views\ExchangeRateLookup.spec.js" />
+    <Content Include="tests\src\Views\MetricWidget.spec.js" />
+    <Content Include="unsupported.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="configuration\development.js" />
+    <Content Include="configuration\production.js" />
+    <Content Include="content\clippy.swf" />
+    <Content Include="content\images\114x114.png" />
+    <Content Include="content\images\144x144.png" />
+    <Content Include="content\images\72x72.png" />
+    <Content Include="content\images\apple-touch-startup-image-1496x2048.png" />
+    <Content Include="content\images\apple-touch-startup-image-1536x2008.png" />
+    <Content Include="content\images\apple-touch-startup-image-320x480.png" />
+    <Content Include="content\images\apple-touch-startup-image-640x1096.png" />
+    <Content Include="content\images\apple-touch-startup-image-640x920.png" />
+    <Content Include="content\images\apple-touch-startup-image-748x1024.png" />
+    <Content Include="content\images\apple-touch-startup-image-768x1004.png" />
+    <Content Include="content\images\blank.gif" />
+    <Content Include="content\images\icons\accountant_link_24.png" />
+    <Content Include="content\images\icons\add_24.png" />
+    <Content Include="content\images\icons\AlarmClock_24x24.png" />
+    <Content Include="content\images\icons\Alarm_24x24.gif" />
+    <Content Include="content\images\icons\Attachment_24.png" />
+    <Content Include="content\images\icons\Attachment_48x48.png" />
+    <Content Include="content\images\icons\Attachment_URL_24.png" />
+    <Content Include="content\images\icons\Back_24.png" />
+    <Content Include="content\images\icons\Bang_24x24.png" />
+    <Content Include="content\images\icons\Browse_Next.png" />
+    <Content Include="content\images\icons\Browse_Next_24.png" />
+    <Content Include="content\images\icons\Browse_Previous.png" />
+    <Content Include="content\images\icons\Browse_Previous_24.png" />
+    <Content Include="content\images\icons\Calendar_24x24.png" />
+    <Content Include="content\images\icons\Call_24x24.png" />
+    <Content Include="content\images\icons\cancl_24.png" />
+    <Content Include="content\images\icons\Clear_Activity_24x24.png" />
+    <Content Include="content\images\icons\close_24.png" />
+    <Content Include="content\images\icons\Company_24.png" />
+    <Content Include="content\images\icons\ContactProfile_48x48.png" />
+    <Content Include="content\images\icons\Contacts_24x24.png" />
+    <Content Include="content\images\icons\database_24.png" />
+    <Content Include="content\images\icons\del_24.png" />
+    <Content Include="content\images\icons\Dial_24x24.png" />
+    <Content Include="content\images\icons\disabled_AlarmClock_24x24.png" />
+    <Content Include="content\images\icons\disabled_Bang_24x24.png" />
+    <Content Include="content\images\icons\disabled_Flag_24x24.png" />
+    <Content Include="content\images\icons\disabled_Recurring_24x24.png" />
+    <Content Include="content\images\icons\disabled_Touched_24x24.png" />
+    <Content Include="content\images\icons\Down_Arrow.png" />
+    <Content Include="content\images\icons\Down_Arrow_24x24.png" />
+    <Content Include="content\images\icons\Down_Arrow_Collapsed.png" />
+    <Content Include="content\images\icons\drawer_24.png" />
+    <Content Include="content\images\icons\drilldown_24.png" />
+    <Content Include="content\images\icons\edit_24.png" />
+    <Content Include="content\images\icons\filter_24.png" />
+    <Content Include="content\images\icons\Flag_24X24.png" />
+    <Content Include="content\images\icons\headerMenu_24.png" />
+    <Content Include="content\images\icons\help_24.png" />
+    <Content Include="content\images\icons\Hide_Details_active_24.png" />
+    <Content Include="content\images\icons\Hide_Details_inactive_24.png" />
+    <Content Include="content\images\icons\Holiday_schemes_24.png" />
+    <Content Include="content\images\icons\home_24.png" />
+    <Content Include="content\images\icons\journal_24.png" />
+    <Content Include="content\images\icons\Leads_24x24.png" />
+    <Content Include="content\images\icons\letters_24.png" />
+    <Content Include="content\images\icons\login_24.png" />
+    <Content Include="content\images\icons\Map_24.png" />
+    <Content Include="content\images\icons\Meeting_24x24.png" />
+    <Content Include="content\images\icons\mobile_24.png" />
+    <Content Include="content\images\icons\New_Contact_24x24.png" />
+    <Content Include="content\images\icons\New_Note_24x24.png" />
+    <Content Include="content\images\icons\Next_24.png" />
+    <Content Include="content\images\icons\note_24.png" />
+    <Content Include="content\images\icons\note_account_24x24.png" />
+    <Content Include="content\images\icons\note_contact_24x24.png" />
+    <Content Include="content\images\icons\note_lead_24x24.png" />
+    <Content Include="content\images\icons\Note_More_24x24.png" />
+    <Content Include="content\images\icons\note_opp_24x24.png" />
+    <Content Include="content\images\icons\OK_24.png" />
+    <Content Include="content\images\icons\opportunity_24.png" />
+    <Content Include="content\images\icons\Opportunity_Lost_24.png" />
+    <Content Include="content\images\icons\Opportunity_Won_24.png" />
+    <Content Include="content\images\icons\Personal_24x24.png" />
+    <Content Include="content\images\icons\product_24.png" />
+    <Content Include="content\images\icons\Recurring_24x24.gif" />
+    <Content Include="content\images\icons\Recurring_24x24.png" />
+    <Content Include="content\images\icons\Reminder_24x24.gif" />
+    <Content Include="content\images\icons\Reschedule_Activity_24x24.gif" />
+    <Content Include="content\images\icons\returns_24.png" />
+    <Content Include="content\images\icons\save_24.png" />
+    <Content Include="content\images\icons\Scale_24.png" />
+    <Content Include="content\images\icons\Schedule_Call_24x24.png" />
+    <Content Include="content\images\icons\Schedule_Event_24x24.gif" />
+    <Content Include="content\images\icons\Schedule_Literature_Request_24x24.gif" />
+    <Content Include="content\images\icons\Schedule_Meeting_24x24.png" />
+    <Content Include="content\images\icons\Schedule_Ticket_Activity_24x24.gif" />
+    <Content Include="content\images\icons\Schedule_ToDo_24x24.png" />
+    <Content Include="content\images\icons\Scheduling_24x24.png" />
+    <Content Include="content\images\icons\security_24.png" />
+    <Content Include="content\images\icons\Send_Write_email_24x24.png" />
+    <Content Include="content\images\icons\settings_24.png" />
+    <Content Include="content\images\icons\Show_Details_active_24.png" />
+    <Content Include="content\images\icons\Show_Details_inactive_24.png" />
+    <Content Include="content\images\icons\Sort_Down_24.png" />
+    <Content Include="content\images\icons\Sort_Up_24.png" />
+    <Content Include="content\images\icons\SpeedSearch_24x24.png" />
+    <Content Include="content\images\icons\srch_24.png" />
+    <Content Include="content\images\icons\Ticket_24x24.png" />
+    <Content Include="content\images\icons\Tools_24x24.png" />
+    <Content Include="content\images\icons\Touched_24x24.png" />
+    <Content Include="content\images\icons\To_Do_24x24.png" />
+    <Content Include="content\images\icons\Whats_New_24.png" />
+    <Content Include="content\images\logo.png" />
+    <Content Include="content\images\meter-empty.png" />
+    <Content Include="content\images\meter-full-1.png" />
+    <Content Include="content\images\meter-full-2.png" />
+    <Content Include="content\images\meter-full-3.png" />
+    <Content Include="content\images\meter-full-4.png" />
+    <Content Include="content\images\meter-full-5.png" />
+    <Content Include="content\images\meter-full-6.png" />
+    <Content Include="content\images\toggle\thumb.png" />
+    <Content Include="content\images\toggle\toggle.png" />
+    <Content Include="content\images\toggle\toggleOn.png" />
+    <Content Include="content\images\touch-icon-ipad-retina.png" />
+    <Content Include="content\images\touch-icon-ipad.png" />
+    <Content Include="content\images\touch-icon-iphone-retina.png" />
+    <Content Include="content\images\touch-icon-iphone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="src-docs\docs-categories.json" />
+    <Content Include="src-docs\docs-config.json" />
+    <Content Include="src-docs\docs-guides.json" />
+    <Content Include="src-docs\guides\upgrading_v12_to_v20\README.md" />
+    <Content Include="src-docs\guides\v2_appendix_amd\README.md" />
+    <Content Include="src-docs\guides\v2_appendix_browser_setup\README.md" />
+    <Content Include="src-docs\guides\v2_appendix_detail_data_life_cycle\README.md" />
+    <Content Include="src-docs\guides\v2_appendix_edit_as_insert_data_life_cycle\README.md" />
+    <Content Include="src-docs\guides\v2_appendix_edit_as_update_data_life_cycle\README.md" />
+    <Content Include="src-docs\guides\v2_appendix_list_data_life_cycle\README.md" />
+    <Content Include="src-docs\guides\v2_appendix_wire_detail_to_edit\README.md" />
+    <Content Include="src-docs\guides\v2_appendix_wire_list_to_detail\README.md" />
+    <Content Include="src-docs\guides\v2_appendix_wire_list_to_edit\README.md" />
+    <Content Include="src-docs\guides\v2_beyond_the_guide_creating_a_grouped_list\README.md" />
+    <Content Include="src-docs\guides\v2_beyond_the_guide_creating_a_login_basic_auth\README.md" />
+    <Content Include="src-docs\guides\v2_beyond_the_guide_defining_hashtags\README.md" />
+    <Content Include="src-docs\guides\v2_beyond_the_guide_defining_list_actions\README.md" />
+    <Content Include="src-docs\guides\v2_beyond_the_guide_defining_quick_actions\README.md" />
+    <Content Include="src-docs\guides\v2_beyond_the_guide_defining_related_views\README.md" />
+    <Content Include="src-docs\guides\v2_beyond_the_guide_detail_layout_properties\README.md" />
+    <Content Include="src-docs\guides\v2_beyond_the_guide_edit_validation\README.md" />
+    <Content Include="src-docs\guides\v2_beyond_the_guide_list_search\README.md" />
+    <Content Include="src-docs\guides\v2_beyond_the_guide_localization\README.md" />
+    <Content Include="src-docs\guides\v2_beyond_the_guide_navigation\README.md" />
+    <Content Include="src-docs\guides\v2_beyond_the_guide_toolbars\README.md" />
+    <Content Include="src-docs\guides\v2_localization_detection\README.md" />
+    <Content Include="src-docs\guides\v2_localization_example\README.md" />
+    <Content Include="src-docs\guides\v2_overview\README.md" />
+    <Content Include="src-docs\guides\v2_template_guide\argos-template_guide-complete.zip" />
+    <Content Include="src-docs\guides\v2_template_guide\README.md" />
+    <Content Include="src-docs\guides\v3_scene_layout_pane\README.md" />
+    <Content Include="src-docs\guides\v3_stores\README.md" />
+    <Content Include="src-docs\guides\v3_upgrading_v2_to_v3\README.md" />
+    <Content Include="tests\README.md" />
+    <Content Include="tests\src\feeds\feed.json" />
+    <Content Include="tests\src\feeds\metric1.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".csslintrc" />
+    <Content Include=".jshintrc" />
+    <Content Include=".travis.yml" />
+    <Content Include="GruntRunner.tmpl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="index.manifest" />
+    <Content Include="index.manifest.ashx" />
+    <Content Include="LICENSE" />
+    <Content Include="METRIC-WIDGETS.md" />
+    <Content Include="package.json" />
+    <Content Include="README.md" />
+    <Content Include="template.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="web.config" />
+    <Content Include="localization\exported\README.md" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="src-typescript\Application.ts" />
+    <TypeScriptCompile Include="src-typescript\dojo.d.ts" />
+    <TypeScriptCompile Include="src-typescript\dojo.types.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src-docs\images\" />
+  </ItemGroup>
+  <Import Project="$(VSToolsPath)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(VSToolsPath)\TypeScript\Microsoft.TypeScript.targets')" />
+</Project>
