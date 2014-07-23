@@ -78,6 +78,7 @@ define('Mobile/SalesLogix/ApplicationModule', [
     'Mobile/SalesLogix/Views/Event/List',
     'Mobile/SalesLogix/Views/Event/Detail',
     'Mobile/SalesLogix/Views/Event/Edit',
+    'Mobile/SalesLogix/Views/Groups/Selector',
     'Mobile/SalesLogix/Views/Lead/List',
     'Mobile/SalesLogix/Views/Lead/Detail',
     'Mobile/SalesLogix/Views/Lead/Edit',
@@ -108,6 +109,7 @@ define('Mobile/SalesLogix/ApplicationModule', [
     'Mobile/SalesLogix/Views/History/Detail',
     'Mobile/SalesLogix/Views/History/Edit',
     'Mobile/SalesLogix/Views/History/RelatedView',
+    'Mobile/SalesLogix/Views/User/CalendarAccessList',
     'Mobile/SalesLogix/Views/User/List',
     'Mobile/SalesLogix/Views/Attachment/ViewAttachment',
     'Mobile/SalesLogix/Views/Attachment/List',
@@ -185,6 +187,7 @@ define('Mobile/SalesLogix/ApplicationModule', [
     EventList,
     EventDetail,
     EventEdit,
+    GroupsSelector,
     LeadList,
     LeadDetail,
     LeadEdit,
@@ -215,6 +218,7 @@ define('Mobile/SalesLogix/ApplicationModule', [
     HistoryDetail,
     HistoryEdit,
     HistoryRelatedView,
+    CalendarAccessList,
     UserList,
     ViewAttachment,
     AttachmentList,
@@ -269,6 +273,7 @@ define('Mobile/SalesLogix/ApplicationModule', [
             this.registerView(new AccountList({
                 id: 'account_related',
                 expose: false,
+                groupsMode: false,
                 defaultSearchTerm: function() {
                     return '';
                 }
@@ -296,6 +301,7 @@ define('Mobile/SalesLogix/ApplicationModule', [
             this.registerView(new ContactList({
                 id: 'contact_related',
                 expose: false,
+                groupsMode: false,
                 defaultSearchTerm: function() {
                     return '';
                 }
@@ -323,12 +329,15 @@ define('Mobile/SalesLogix/ApplicationModule', [
                 }
             }));
 
+            this.registerView(new GroupsSelector());
+
             this.registerView(new OpportunityEdit());
             this.registerView(new OpportunityList());
             this.registerView(new OpportunityDetail());
             this.registerView(new OpportunityList({
                 id: 'opportunity_related',
                 expose: false,
+                groupsMode: false,
                 defaultSearchTerm: function() {
                     return '';
                 }
@@ -369,6 +378,7 @@ define('Mobile/SalesLogix/ApplicationModule', [
             this.registerView(new LeadList({
                 id: 'lead_related',
                 expose: false,
+                groupsMode: false,
                 defaultSearchTerm: function() {
                     return '';
                 }
@@ -380,6 +390,7 @@ define('Mobile/SalesLogix/ApplicationModule', [
             this.registerView(new TicketList({
                 id: 'ticket_related',
                 expose: false,
+                groupsMode: false,
                 defaultSearchTerm: function() {
                     return '';
                 }
@@ -428,9 +439,14 @@ define('Mobile/SalesLogix/ApplicationModule', [
             this.registerView(new HistoryList({
                 id: 'history_related',
                 expose: false,
+                groupsMode: false,
                 defaultSearchTerm: function() {
                     return '';
                 }
+            }));
+
+            this.registerView(new CalendarAccessList({
+                expose: false
             }));
 
             this.registerView(new UserList({

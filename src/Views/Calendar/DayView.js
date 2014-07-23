@@ -54,7 +54,7 @@ define('Mobile/SalesLogix/Views/Calendar/DayView', [
         allDayText: 'All-Day',
         eventHeaderText: 'Events',
         activityHeaderText: 'Activities',
-        eventMoreText: 'View ${0} More Event(s)',
+        eventMoreText: 'View More Event(s)',
         toggleCollapseText: 'toggle collapse',
 
         // Templates
@@ -77,8 +77,7 @@ define('Mobile/SalesLogix/Views/Calendar/DayView', [
             '<li data-action="activateEntry" data-key="{%= $.$key %}" data-descriptor="{%: $.Description %}" data-activity-type="{%: $.Type %}">',
             '<table class="calendar-entry-table"><tr>',
             '<td class="entry-table-icon">',
-            '<button data-action="selectEntry" class="list-item-selector button">',
-            '<img src="{%= $$.activityIconByType[$.Type] || $$.icon || $$.selectIcon %}" class="icon" />',
+            '<button data-action="selectEntry" class="list-item-selector button {%= $$.activityIconByType[$.Type] %}">',
             '</button>',
             '</td>',
             '<td class="entry-table-time">{%! $$.timeTemplate %}</td>',
@@ -90,8 +89,8 @@ define('Mobile/SalesLogix/Views/Calendar/DayView', [
             '<li data-action="activateEntry" data-key="{%= $.$key %}" data-descriptor="{%: $.$descriptor %}" data-activity-type="Event">',
             '<table class="calendar-entry-table"><tr>',
             '<td class="entry-table-icon">',
-            '<button data-action="selectEntry" class="list-item-selector button">',
-            '<img src="{%= $$.eventIcon %}" class="icon" /></button>',
+            '<button data-action="selectEntry" class="list-item-selector button {%= $$.eventIcon %}">',
+            '</button>',
             '</td>',
             '<td class="entry-table-description">{%! $$.eventItemTemplate %}</td>',
             '</tr></table>',
@@ -129,14 +128,14 @@ define('Mobile/SalesLogix/Views/Calendar/DayView', [
         navigationTemplate: new Simplate([
             '<div class="split-buttons">',
             '<button data-tool="today" data-action="getToday" class="button">{%: $.todayText %}</button>',
-            '<button data-tool="selectdate" data-action="selectDate" class="button"><span></span></button>',
+            '<button data-tool="selectdate" data-action="selectDate" class="button fa fa-calendar"><span></span></button>',
             '<button data-tool="day" class="button">{%: $.dayText %}</button>',
             '<button data-tool="week" data-action="navigateToWeekView" class="button">{%: $.weekText %}</button>',
             '<button data-tool="month" data-action="navigateToMonthView" class="button">{%: $.monthText %}</button>',
             '</div>',
             '<div class="nav-bar">',
-            '<button data-tool="next" data-action="getNextDay" class="button button-next"><span></span></button>',
-            '<button data-tool="prev" data-action="getPrevDay" class="button button-prev"><span></span></button>',
+            '<button data-tool="next" data-action="getNextDay" class="button button-next fa fa-arrow-right fa-lg"><span></span></button>',
+            '<button data-tool="prev" data-action="getPrevDay" class="button button-prev fa fa-arrow-left fa-lg"><span></span></button>',
             '<h3 class="date-text" data-dojo-attach-point="dateNode"></h3>',
             '</div>'
         ]),
@@ -173,7 +172,8 @@ define('Mobile/SalesLogix/Views/Calendar/DayView', [
         //View Properties
         id: 'calendar_daylist',
         cls: 'activities-for-day',
-        icon: 'content/images/icons/Calendar_24x24.png',
+        iconClass: 'fa fa-calendar fa-lg',
+
         datePickerView: 'generic_calendar',
         monthView: 'calendar_monthlist',
         weekView: 'calendar_weeklist',
@@ -205,17 +205,18 @@ define('Mobile/SalesLogix/Views/Calendar/DayView', [
             'Type'
         ],
         activityIconByType: {
-            'atToDo': 'content/images/icons/To_Do_24x24.png',
-            'atPhoneCall': 'content/images/icons/Call_24x24.png',
-            'atAppointment': 'content/images/icons/Meeting_24x24.png',
-            'atLiterature': 'content/images/icons/Schedule_Literature_Request_24x24.gif',
-            'atPersonal': 'content/images/icons/Personal_24x24.png',
-            'atQuestion': 'content/images/icons/help_24.png',
-            'atNote': 'content/images/icons/note_24.png',
-            'atEMail': 'content/images/icons/letters_24.png'
+            'atToDo': 'fa fa-list-ul',
+            'atPhoneCall': 'fa fa-phone',
+            'atAppointment': 'fa fa-users',
+            'atLiterature': 'fa fa-book',
+            'atPersonal': 'fa fa-check-square-o',
+            'atQuestion': 'fa fa-question-circle',
+            'atNote': 'fa fa-file-text-o',
+            'atEMail': 'fa fa-envelope'
         },
-        eventIcon: 'content/images/icons/Holiday_schemes_24.png',
+        eventIcon: 'fa fa-calendar-o',
         resourceKind: 'activities',
+        pageSize: 1000,
 
         continuousScrolling: false,
 
@@ -329,7 +330,7 @@ define('Mobile/SalesLogix/Views/Calendar/DayView', [
 
             if (feed['$totalResults'] > feedLength) {
                 domClass.add(this.eventContainerNode, 'list-has-more');
-                this.set('eventRemainingContent', string.substitute(this.eventMoreText, [feed['$totalResults'] - feedLength]));
+                this.set('eventRemainingContent', this.eventMoreText);
             } else {
                 domClass.remove(this.eventContainerNode, 'list-has-more');
                 this.set('eventRemainingContent', '');
@@ -350,7 +351,9 @@ define('Mobile/SalesLogix/Views/Calendar/DayView', [
                 o.push(this.rowTemplate.apply(row, this));
             }
 
-            if (feedLength === 0) {
+            // If we fetched a page that has no data due to un-reliable counts,
+            // check if we fetched anything in the previous pages before assuming there is no data.
+            if (feedLength === 0 && Object.keys(this.entries).length === 0) {
                 this.set('listContent', this.noDataTemplate.apply(this));
                 return false;
             }
@@ -359,12 +362,9 @@ define('Mobile/SalesLogix/Views/Calendar/DayView', [
                 domConstruct.place(o.join(''), this.contentNode, 'last');
             }
 
-            if (typeof this.feed['$totalResults'] !== 'undefined') {
-                remaining = this.feed['$totalResults'] - (this.feed['$startIndex'] + this.feed['$itemsPerPage'] - 1);
-                this.set('remainingContent', string.substitute(this.remainingText, [remaining]));
-            }
+            this.set('remainingContent', '');// Feed does not return reliable data, don't show remaining
 
-            domClass.toggle(this.domNode, 'list-has-more', this.hasMoreData());
+            domClass.toggle(this.domNode, 'list-has-more', this.hasMoreData());// This could be wrong, handle it on the next processFeed if so
 
             if (this.options.allowEmptySelection) {
                 domClass.add(this.domNode, 'list-has-empty-opt');
@@ -449,11 +449,13 @@ define('Mobile/SalesLogix/Views/Calendar/DayView', [
                 tools: {
                     tbar: [{
                             id: 'complete',
+                            cls: 'fa fa-check fa-fw fa-lg',
                             fn: this.selectDateSuccess,
                             scope: this
                         }, {
                             id: 'cancel',
                             side: 'left',
+                            cls: 'fa fa-ban fa-fw fa-lg',
                             fn: ReUI.back,
                             scope: ReUI
                         }]

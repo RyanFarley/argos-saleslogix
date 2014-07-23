@@ -50,6 +50,8 @@ define('Mobile/SalesLogix/Application', [
         rememberNavigationState: true,
         enableUpdateNotification: false,
         multiCurrency: false,
+        enableGroups: true,
+        enableHashTags: true,
         speedSearch: {
             includeStemming: true,
             includePhonic: true,
@@ -60,6 +62,11 @@ define('Mobile/SalesLogix/Application', [
         enableCaching: true,
         userDetailsQuerySelect: ['UserName', 'UserInfo/UserName', 'UserInfo/FirstName', 'UserInfo/LastName', 'DefaultOwner/OwnerDescription'],
         userOptionsToRequest: [
+            'DefaultGroup;ACCOUNT',
+            'DefaultGroup;CONTACT',
+            'DefaultGroup;OPPORTUNITY',
+            'DefaultGroup;LEAD',
+            'DefaultGroup;TICKET',
             'General;InsertSecCodeID',
             'General;Currency',
             'Calendar;DayStartTime',
@@ -83,6 +90,7 @@ define('Mobile/SalesLogix/Application', [
             'ChangeOpportunityRate',
             'LockOpportunityRate'
         ],
+        appName: 'argos-saleslogix',
         serverVersion: {
             'major': 8,
             'minor': 0,
@@ -97,6 +105,8 @@ define('Mobile/SalesLogix/Application', [
         homeViewId: 'myactivity_list',
         loginViewId: 'login',
         init: function() {
+            var original,
+                app = this;
             if (has('ie') && has('ie') < 9) {
                 window.location.href = 'unsupported.html';
             }
@@ -104,6 +114,15 @@ define('Mobile/SalesLogix/Application', [
             this.inherited(arguments);
             this._loadNavigationState();
             this._loadPreferences();
+
+            original = Sage.SData.Client.SDataService.prototype.executeRequest;
+
+            Sage.SData.Client.SDataService.prototype.executeRequest = function(request, options, ajax) {
+                request.setRequestHeader('X-Application-Name', app.appName);
+                request.setRequestHeader('X-Application-Version', string.substitute('${major}.${minor}.${revision}', app.mobileVersion));
+                original.apply(this, arguments);
+            };
+           
         },
         initConnects: function() {
             this.inherited(arguments);
@@ -137,6 +156,9 @@ define('Mobile/SalesLogix/Application', [
         _viewTransitionTo: function(view) {
             this.inherited(arguments);
             this._checkSaveNavigationState();
+            if (App.snapper) {
+                App.snapper.close();
+            }
         },
         _checkSaveNavigationState: function() {
             if (this.rememberNavigationState !== false) {
@@ -556,6 +578,7 @@ define('Mobile/SalesLogix/Application', [
 
             currentLang = moment.lang();
             moment.lang(currentLang, custom);
+            this.moment = moment().lang(currentLang, custom);
         },
         /*
          * Builds an object that will get passed into moment.lang()
@@ -792,9 +815,18 @@ define('Mobile/SalesLogix/Application', [
         navigateToHomeView: function() {
             var visible, view, split, key, viewId;
             this.loadSnapper();
+
+            visible = this.preferences && this.preferences.home && this.preferences.home.visible;
+            if (visible && visible.length > 0) {
+                this.homeViewId = visible[0];
+            }
+
+            // Default view will be the home view, overwritten below if a redirect hash is supplied
+            view = this.getView(this.homeViewId);
+
             if (this.redirectHash) {
                 split = this.redirectHash.split(';');
-                if (split.length > 0) {
+                if (split.length > 1) {
                     viewId = split[0];
                     key = split[1];
                     view = this.getView(viewId);
@@ -803,22 +835,13 @@ define('Mobile/SalesLogix/Application', [
                             view.show({
                                 key: key
                             });
-                        } else {
-                            view.show();
                         }
                     }
                 }
-            } else {
-                visible = this.preferences && this.preferences.home && this.preferences.home.visible;
-                if (visible && visible.length > 0) {
-                    this.homeViewId = visible[0];
-                }
+            }
 
-                view = this.getView(this.homeViewId);
-                if (view) {
-                    // TODO: Handle if the default view doesn't load
-                    view.show();
-                }
+            if (view) {
+                view.show();
             }
         },
         navigateToActivityInsertView: function() {

@@ -80,14 +80,14 @@ define('Mobile/SalesLogix/Views/Calendar/WeekView', [
         navigationTemplate: new Simplate([
             '<div class="split-buttons">',
             '<button data-tool="today" data-action="getThisWeekActivities" class="button">{%: $.todayText %}</button>',
-            '<button data-tool="selectdate" data-action="selectDate" class="button"><span></span></button>',
+            '<button data-tool="selectdate" data-action="selectDate" class="button fa fa-calendar"><span></span></button>',
             '<button data-tool="day" data-action="navigateToDayView" class="button">{%: $.dayText %}</button>',
             '<button data-tool="week" class="button">{%: $.weekText %}</button>',
             '<button data-tool="month" data-action="navigateToMonthView" class="button">{%: $.monthText %}</button>',
             '</div>',
             '<div class="nav-bar">',
-            '<button data-tool="next" data-action="getNextWeekActivities" class="button button-next"><span></span></button>',
-            '<button data-tool="prev" data-action="getPrevWeekActivities" class="button button-prev"><span></span></button>',
+            '<button data-tool="next" data-action="getNextWeekActivities" class="button button-next fa fa-arrow-right fa-lg"><span></span></button>',
+            '<button data-tool="prev" data-action="getPrevWeekActivities" class="button button-prev fa fa-arrow-left fa-lg"><span></span></button>',
             '<h3 class="date-text" data-dojo-attach-point="dateNode"></h3>',
             '</div>'
         ]),
@@ -106,7 +106,8 @@ define('Mobile/SalesLogix/Views/Calendar/WeekView', [
             '<li data-action="activateEntry" data-key="{%= $.$key %}" data-descriptor="{%: $.$descriptor %}" data-activity-type="{%: $.Type %}">',
             '<table class="calendar-entry-table"><tr>',
             '<td class="entry-table-icon">',
-            '<button data-action="selectEntry" class="list-item-selector button"><img src="{%= $$.activityIconByType[$.Type] || $$.selectIcon %}" class="icon" /></button>',
+            '<button data-action="selectEntry" class="list-item-selector button {%= $$.activityIconByType[$.Type] %}">',
+            '</button>',
             '</td>',
             '<td class="entry-table-time">{%! $$.timeTemplate %}</td>',
             '<td class="entry-table-description">{%! $$.itemTemplate %}</td>',
@@ -203,13 +204,6 @@ define('Mobile/SalesLogix/Views/Calendar/WeekView', [
         weekStartDate: null,
         weekEndDate: null,
         todayDate: null,
-        typeIcons: {
-            'defaultIcon': 'content/images/icons/To_Do_24x24.png',
-            'atAppointment': 'content/images/icons/Meeting_24x24.png',
-            'atPhoneCall': 'content/images/icons/Call_24x24.png',
-            'atToDo': 'content/images/icons/To_Do_24x24.png',
-            'atPersonal': 'content/images/icons/Personal_24x24.png'
-        },
         continuousScrolling: false,
 
         queryWhere: null,
@@ -232,16 +226,16 @@ define('Mobile/SalesLogix/Views/Calendar/WeekView', [
             'Type'
         ],
         activityIconByType: {
-            'atToDo': 'content/images/icons/To_Do_24x24.png',
-            'atPhoneCall': 'content/images/icons/Call_24x24.png',
-            'atAppointment': 'content/images/icons/Meeting_24x24.png',
-            'atLiterature': 'content/images/icons/Schedule_Literature_Request_24x24.gif',
-            'atPersonal': 'content/images/icons/Personal_24x24.png',
-            'atQuestion': 'content/images/icons/help_24.png',
-            'atNote': 'content/images/icons/note_24.png',
-            'atEMail': 'content/images/icons/letters_24.png'
+            'atToDo': 'fa fa-list-ul',
+            'atPhoneCall': 'fa fa-phone',
+            'atAppointment': 'fa fa-users',
+            'atLiterature': 'fa fa-users',
+            'atPersonal': 'fa fa-check-square-o',
+            'atQuestion': 'fa fa-question',
+            'atNote': 'fa fa-users',
+            'atEMail': 'fa fa-envelope'
         },
-        eventIcon: 'content/images/icons/Holiday_schemes_24.png',
+        eventIcon: 'fa fa-calendar-o',
 
         contractName: 'system',
         pageSize: 105, // gives 15 activities per day
@@ -290,9 +284,6 @@ define('Mobile/SalesLogix/Views/Calendar/WeekView', [
             this.currentDate = this.getStartDay(this.weekStartDate.clone().subtract({days:1}));
             this.refresh();
         },
-        getTypeIcon: function(type) {
-            return this.typeIcons[type] || this.typeIcons['defaultIcon'];
-        },
         setWeekQuery: function() {
             var setDate = this.currentDate || this.todayDate;
             this.weekStartDate = this.getStartDay(setDate);
@@ -327,16 +318,19 @@ define('Mobile/SalesLogix/Views/Calendar/WeekView', [
 
             var todayNode = this.addTodayDom(),
                 entryGroups = this.entryGroups,
+                feedLength = feed['$resources'].length,
                 entryOrder = [],
                 dateCompareString = 'YYYY-MM-DD',
                 o = [],
-                i, 
+                i,
                 currentEntry,
                 entryOrderLength,
                 remaining,
                 startDate;
 
-            if (this.feed['$totalResults'] === 0) {
+            // If we fetched a page that has no data due to un-reliable counts,
+            // check if we fetched anything in the previous pages before assuming there is no data.
+            if (feedLength === 0 && Object.keys(this.entries).length === 0) {
                 query(this.contentNode).append(this.noDataTemplate.apply(this));
             } else if (feed['$resources']) {
 
@@ -393,10 +387,7 @@ define('Mobile/SalesLogix/Views/Calendar/WeekView', [
                 }
             }
 
-            if (typeof this.feed['$totalResults'] !== 'undefined') {
-                remaining = this.feed['$totalResults'] - (this.feed['$startIndex'] + this.feed['$itemsPerPage'] - 1);
-                this.set('remainingContent', string.substitute(this.remainingText, [remaining]));
-            }
+            this.set('remainingContent', '');// Feed does not return reliable data, don't show remaining
 
             domClass.toggle(this.domNode, 'list-has-more', this.hasMoreData());
             this._loadPreviousSelections();
@@ -556,10 +547,12 @@ define('Mobile/SalesLogix/Views/Calendar/WeekView', [
                 tools: {
                     tbar: [{
                             id: 'complete',
+                            cls: 'fa fa-check fa-fw fa-lg',
                             fn: this.selectDateSuccess,
                             scope: this
                         }, {
                             id: 'cancel',
+                            cls: 'fa fa-ban fa-fw fa-lg',
                             side: 'left',
                             fn: ReUI.back,
                             scope: ReUI

@@ -19,6 +19,7 @@
 
     <title>Saleslogix</title>
 
+    <link rel="icon" type="image/png" href="content/images/icon.png" />
     <link rel="apple-touch-icon" href="content/images/touch-icon-iphone.png" />
     <link rel="apple-touch-icon" sizes="72x72" href="content/images/72x72.png" />
     <link rel="apple-touch-icon" sizes="76x76" href="content/images/touch-icon-ipad.png" />
@@ -150,7 +151,9 @@
                         return;
                     }
 
-                    moment.lang('<%= System.Globalization.CultureInfo.CurrentUICulture.Parent.ToString().ToLower() %>');
+                    var culture = '<%= System.Globalization.CultureInfo.CurrentUICulture.Parent.Name.ToLower() %>';
+                    moment.lang(culture);
+                    configuration.currentCulture = culture;
                     window.moment = moment;
 
                     var instance = new application(configuration);

@@ -52,12 +52,16 @@
 
     .button
     {
-        margin: 12px 0 12px 0;
         width: 100%;
+        margin: 12px 0 12px 0;
         height: 40px;
         line-height: 40px;
         cursor: pointer;
-        font-size: .9em;
+        font-size: 1em;
+        background-color: @blue1-darker;
+        color: #fff;
+        .border-radius(6px);
+        .box-sizing(border-box);
     }
 
     h2
@@ -65,9 +69,73 @@
         display: none;
     }
 
-    .clear-button
+    /* larger than typical phone, put styles that apply to tablet AND desktop here */
+    @media only screen and (min-width: @tablet-portrait)
     {
-        right: 12px;
+        background-color: @gray2-lighter;
+
+        .panel-content
+        {
+            background-color: #fff;
+            padding: 25px;
+        }
+
+        .button
+        {
+            margin-left: 25%;
+            width: auto;
+            padding: 0 50px 0 50px;
+        }
+    }
+
+    /*
+        desktop style only
+    */
+    @media only screen and (min-width: @desktop)
+    {
+        .panel-content
+        {
+            width: 30%;
+        }
+
+        .button
+        {
+            margin-left: 35%;
+        }
+
+        .panel-content
+        {
+            margin: auto;
+        }
+
+        .clear-button
+        {
+            right: 35%;
+        }
+    }
+
+    /* Tablet */
+    @media only screen and (min-width: @tablet-portrait) and (max-width: @tablet-landscape)
+    {
+        .panel-content
+        {
+            width: 50%;
+        }
+
+        .button
+        {
+            margin-left: 25%;
+        }
+
+        .panel-content
+        {
+            margin: auto;
+        }
+
+        .clear-button
+        {
+            right: 25%;
+        }
     }
 }
 
@@ -79,7 +147,7 @@
     padding-left: 0px;
     padding-right: 34px;
     border: 1px solid @gray1-lighter;
-    background-color: @gray5-lighter;
+    background-color: @gray2-lighter;
 }
 
 .note-text-row > label,
@@ -124,9 +192,6 @@
     visibility: hidden;
     height: 24px;
     width: 24px;
-    background-image: url(../images/icons/Note_More_24x24.png) !important;
-    background-repeat: no-repeat;
-    background-position: center center;
     z-index: 1;
     position: absolute;
     bottom: 5px;
@@ -173,7 +238,7 @@
 
 #configure
 {
-    > .list-content
+    .list-content
     {
         > li
         {
@@ -204,19 +269,7 @@
                     display: block;
                     width: 48px;
                     height: 24px;
-                    background-repeat: no-repeat;
-                    background-position: center center;
                     cursor: pointer;
-                }
-
-                > [data-action="moveUp"]
-                {
-                    background-image: url(../images/icons/Sort_Down_24.png);
-                }
-
-                > [data-action="moveDown"]
-                {
-                    background-image: url(../images/icons/Sort_Up_24.png);
                 }
 
                 > .icon
@@ -262,10 +315,15 @@
 }
 
 #help a > div
-{    
-    line-height: 24px;
+{
     margin-left: 32px;
     vertical-align: middle;
+}
+
+#help span.fa
+{
+    float: left;
+    padding: 5px;
 }
 
 #help > .panel-content > ul > li
@@ -364,7 +422,7 @@
     border-color: #000;
     border-width: 0px;
     width: 100%;
-    background-color: @blue3-darker;
+    background-color: @blue1-darker;
     color: #fff;
 }
 
@@ -376,7 +434,18 @@
 .metric-list
 {
     width:100%;
+    margin: 0 0 6px 0;
     .box-sizing(border-box);
+}
+
+.groups-notice
+{
+    width: 100%;
+    border-left: 5px solid @blue1-darker;
+    padding: 10px;
+    margin: 0 0 6px 0;
+    font-weight: bold;
+    display: none;
 }
 
 .metric-title
@@ -414,77 +483,28 @@ li[data-ticket-status] .list-item-selector,
     right: 4px;
 }
 
-.row-edit[data-field-type="lookup"] > div > .button
-{
-    background-image: url(../images/icons/srch_24.png);
-    background-image: url(../images/icons/srch_24.png), linear-gradient(to bottom, #e6e6e6, #cccccc);
-    background-image: url(../images/icons/srch_24.png), -webkit-gradient(
-        linear,
-        left top,
-        left bottom,
-        color-stop(0, #e6e6e6),
-        color-stop(1, #cccccc)
-    );
-    background-image: url(../images/icons/srch_24.png), -webkit-linear-gradient(top, #e6e6e6, #cccccc);
-    background-image: url(../images/icons/srch_24.png), -moz-linear-gradient(top, #e6e6e6, #cccccc);
-    background-image: url(../images/icons/srch_24.png), -ms-linear-gradient(top, #e6e6e6, #cccccc);
-    background-image: url(../images/icons/srch_24.png), -o-linear-gradient(top, #e6e6e6, #cccccc);
-    background-repeat: no-repeat, repeat;
-    background-position: center;
-}
-
-.row-edit[data-field-type="lookup"] > div > .button:active
-{
-    background-image: url(../images/icons/srch_24.png), -webkit-gradient(
-        linear,
-        left bottom,
-        left top,
-        color-stop(0, #e6e6e6),
-        color-stop(1, #cccccc)
-    );
-    background-image: url(../images/icons/srch_24.png), -moz-linear-gradient(bottom, #e6e6e6, #cccccc);
-    background-repeat: no-repeat, repeat;
-    background-position: center;
-}
-
-.row-edit[data-field-type="lookup"] > div > .button span
+.row-edit[data-field-type="lookup"] > div > .button span,
+.row-edit[data-field-type="picklist"] > div > .button span,
+.row-edit[data-field-type="select"] > div > .button span
 {
     visibility: hidden;
-}
-
-.row-edit[data-field-type="date"] > div > .button
-{
-    background-image: url(../images/icons/Calendar_24x24.png);
-    background-repeat: no-repeat, repeat;
-    background-position: center;
-}
-
-.row-edit[data-field-type="date"] > div > .button:active
-{
-    background-image: url(../images/icons/Calendar_24x24.png);
-    background-repeat: no-repeat, repeat;
-    background-position: center;
+    display: none;
 }
 
 .row-edit[data-field-type="date"] > div > .button span
 {
     visibility: hidden;
-}
-
-.row-edit[data-field-type="name"] > div > .button,
-.row-edit[data-field-type="address"] > div > .button,
-.row-edit[data-field-type="note"] > div > .button
-{
-    background-image: url(../images/icons/edit_24.png);
-    background-repeat: no-repeat, repeat;
-    background-position: center;
+    display: none;
 }
 
 .row-edit[data-field-type="name"] > div > .button span,
 .row-edit[data-field-type="address"] > div > .button span,
+.row-edit[data-field-type="recurrences"] > div > .button span,
+.row-edit[data-field-type="duration"] > div > .button span,
 .row-edit[data-field-type="note"] > div > .button span
 {
     visibility: hidden;
+    display: none;
 }
 .row-edit[data-field-type="recurrences"] > div > .button
 {
@@ -541,9 +561,6 @@ li[data-ticket-status] .list-item-selector,
 .calendar-prev-month > button > span
 {
     display: inline-block;
-    background-image: url(../images/icons/Browse_Previous_24.png);
-    background-repeat: no-repeat;
-    background-position: center center;
     margin: 6px;
     width: 24px;
     height: 24px;
@@ -559,9 +576,6 @@ li[data-ticket-status] .list-item-selector,
 .calendar-next-month > button > span
 {
     display: inline-block;
-    background-image: url(../images/icons/Browse_Next_24.png);
-    background-repeat: no-repeat;
-    background-position: center center;
     margin: 6px;
     width: 24px;
     height: 24px;
@@ -575,18 +589,18 @@ li[data-ticket-status] .list-item-selector,
 
 .calendar-day.today
 {
-    background-color: @blue3-light;
+    background-color: @blue1-light;
 }
 
 .calendar-day.weekend
 {
-    background-color: @blue3-darker;
+    background-color: @blue1-darker;
 }
 
 .calendar-day.selected
 {
-    color: #000;
-    background-color: @blue3-dark;
+    color: #fff;
+    background-color: @purple-darker;
 }
 
 /* in Month view .activeDay indicates individual events */
@@ -618,39 +632,11 @@ td.calendar-day {
     border-right-color: #444;
 }
 
-.collapsed-indicator
+.toolButton
 {
-    background-color: transparent;
-    background-image: url(../images/icons/Down_Arrow.png);
-    /*background-image: url(../images/icons/Hide_Details_active_24.png);*/
-    background-repeat: no-repeat;
-    background-position: left center;
-    border: none;
-    background-size: 85%;
-    background-position-y: 3px;
+    color: @icon-color;
 }
 
-.collapsed > .collapsed-indicator
-{
-    background-image: url(../images/icons/Down_Arrow_Collapsed.png);
-    /*background-image: url(../images/icons/Show_Details_active_24.png);*/
-}
-
-.toolButton[data-tool="back"] > span { background-image: url(../images/icons/Browse_Previous_24.png); }
-.toolButton[data-tool="home"] > span { background-image: url(../images/icons/home_24.png); }
-.toolButton[data-tool="edit"] > span { background-image: url(../images/icons/edit_24.png); }
-.toolButton[data-tool="new"] > span { background-image: url(../images/icons/add_24.png); }
-.toolButton[data-tool="save"] > span { background-image: url(../images/icons/save_24.png); }
-.toolButton[data-tool="help"] > span { background-image: url(../images/icons/help_24.png); }
-.toolButton[data-tool="cancel"] > span { background-image: url(../images/icons/cancl_24.png); }
-.toolButton[data-tool="complete"] > span { background-image: url(../images/icons/OK_24.png); }
-.toolButton[data-tool="configure"] > span { background-image: url(../images/icons/Tools_24x24.png); }
-.toolButton[data-tool="settings"] > span { background-image: url(../images/icons/settings_24.png); }
-.toolButton[data-tool="logout"] > span { background-image: url(../images/icons/login_24.png); }
-.toolButton[data-tool="top"] > span { background-image: url(../images/icons/Down_Arrow.png); }
-/*.toolButton[data-tool="top"] > span { background-image: url(../images/icons/Hide_Details_active_24.png); }*/
-.toolButton[data-tool="toggleLeftDrawer"] > span { background-image: url(../images/icons/drawer_24.png); }
-.toolButton[data-tool="toggleRightDrawer"] > span { background-image: url(../images/icons/headerMenu_24.png); }
 .toolbar button.disabled {}
 .toolbar button.disabled > span {
     opacity: .1;
@@ -840,8 +826,6 @@ body.transition > .viewContainer > .footer-toolbar
 #calendar_daylist > h2,
 #calendar_weeklist > div > h2
 {
-    .box-shadow(rgba(0,0,0,0.5) 0px 2px 3px);
-    color: #ffffff;
     background-color: @gray2-darker;
     font-weight: bold;
     .box-sizing(border-box);
@@ -854,7 +838,7 @@ body.transition > .viewContainer > .footer-toolbar
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
-    border-bottom: 1px solid #212721;
+    border-bottom: 1px solid @black-darker;
 }
 
 #calendar_daylist .nav-bar > h3,
@@ -909,7 +893,8 @@ body.transition > .viewContainer > .footer-toolbar
 
 #calendar_weeklist > div > h2.currentDate {
     background-color: #444444;
-    border-left: 8px solid #00678a;
+    border-left: 8px solid @blue1-darker;
+    color: #fff;
 }
 #calendar_monthlist,
 #calendar_weeklist,
@@ -923,7 +908,7 @@ body.transition > .viewContainer > .footer-toolbar
 #calendar_daylist .nav-bar,
 #calendar_weeklist .nav-bar
 {
-    /*padding: 5px 0 0 0; */
+    margin: 0 4px 0 0;
 }
 
 #calendar_monthlist > .split-buttons,
@@ -1032,29 +1017,9 @@ td.entry-table-description {
 .nav-bar > .button-next > span,
 .nav-bar > .button-prev > span
 {
-    display: inline-block;
-    background-repeat: no-repeat;
-    background-position: center center;
-    margin: 6px;
-    width: 24px;
-    height: 24px;
+    display: none;
+    visibility: hidden;
 }
-.nav-bar > .button-prev > span
-{
-    background-image: url(../images/icons/Browse_Previous.png);
-    margin: 6px 6px 6px 4px;
-    background-size: 90%;
-    background-position-y: 0px;
-}
-
-
-.nav-bar > .button-next > span
-{
-    background-image: url(../images/icons/Browse_Next.png);
-    background-size: 90%;
-    background-position-y: -1px;
-}
-
 
 .split-buttons
 {
@@ -1064,10 +1029,11 @@ td.entry-table-description {
 
 .split-buttons > .button
 {
-    display: inline-block;
+    display: inline-block !important;
     padding-left: 10px;
     padding-right: 10px;
     height: 34px;
+    outline: none;
 }
 
 
@@ -1093,27 +1059,8 @@ td.entry-table-description {
 .activities-for-year > .split-buttons > .button[data-tool="year"],
 .activities-for-week > .split-buttons > .button[data-tool="week"]
 {
-    color: #ffffff;
-    border-color: #5a5d59;
-
-    background-color: #FE5000;
-    background-image: linear-gradient(
-        to bottom,
-        #FE5000 0%,
-        #FE5000 100%
-    );
-    background-image: -webkit-gradient(
-        linear,
-        left top,
-        left bottom,
-        color-stop(0, #FE5000),
-        color-stop(1, #FE5000)
-    );
-    background-image: -moz-linear-gradient(
-        center top,
-        #FE5000 0%,
-        #FE5000 100%
-    );
+    color: #fff;
+    background-color: @blue1-darker;
 }
 
 .split-buttons > .button[data-tool="selectdate"]
@@ -1124,10 +1071,6 @@ td.entry-table-description {
 }
 .split-buttons > .button[data-tool="selectdate"] > span
 {
-    display: inline-block;
-    background-image: url(../images/icons/Calendar_24x24.png);
-    background-repeat: no-repeat;
-    background-position: center center;
     width: 24px;
     height: 24px;
 }
@@ -1283,8 +1226,14 @@ td.entry-table-description {
         margin: 0;
         padding: 0;
 
+        > li.no-data, li.list-loading-indicator
+        {
+            min-height: inherit;
+        }
+
         > li
         {
+            min-height: 55px;
             font-size: 1.25em;
             font-weight: bold;
             list-style: none;
@@ -1315,14 +1264,19 @@ td.entry-table-description {
         > li
         {
             padding: 8px 6px 8px 6px;
-            background-color: #FFFFFF;
+            background-color: #fff;
             font-weight: normal;
         }
     }
 
+    .actions-row
+    {
+        background-color: @blue1-darker !important;
+    }
+
     .list-show-selectors
     {
-        padding-left: 80px;
+        padding-left: 90px;
     }
 
     .list-show-selectors .list-item-content,
@@ -1330,7 +1284,7 @@ td.entry-table-description {
     .list-item-content,
     .actions-enabled + .list-item-content
     {
-        padding-left: 80px;
+        padding-left: 70px;
     }
 
     .list-item-selector
@@ -1338,10 +1292,8 @@ td.entry-table-description {
         visibility: hidden;
         width: 61px;
         height: 61px;
-        color: #ff0;
         position: absolute;
-        top: 8px;
-        left: 22px;
+        top: 6px;
         z-index: 10;
         background: none;
         border: 0 none #000;
@@ -1405,13 +1357,12 @@ td.entry-table-description {
         }
     }
 
-    .list-item-static-selector 
+    .list-item-static-selector
     {
         > img.icon,
         > * > img.icon
         {
             bottom: 0;
-            color: #FFFF00;
             height: 24px !important;
             left: 30px;
             position: relative;
@@ -1476,80 +1427,33 @@ td.entry-table-description {
         clear: both;
     }
 
-    .list-item-content-tab
+    .list-item-indicator-content
     {
-        height: 100%;
-        left: 0;
-        margin: 0;
-        overflow: hidden;
-        padding: 0;
-        position: absolute;
-        top: 0;
-        vertical-align: middle;
-        width: 20px;
-        z-index: 10;
-
-        > table
-        { 
-            height: 100%;
-            left: -8px;
-            position: absolute;
-            top: 0;
-            transform: rotate(-90deg);
-            width: 100%;
-            -webkit-transform: rotate(-90deg); 
-            -moz-transform: rotate(-90deg); 
-            -o-transform: rotate(-90deg);
-            -ms-transform: rotate(-90deg); 
-
-            > tbody > tr > td 
-            { 
-                text-align:center;
-
-                > div
-                { 
-                    clear: both;
-                    float: left;
-                    height: 100px;
-                    overflow: hidden;
-                    position: relative;
-                    width: 100px;
-
-                    > span
-                    {
-                        font-size: 0.6em;
-                        font-weight: normal;
-                        height: 100%;
-                        position: relative;
-                        text-align: center;
-                        width: 100%;
-                    }
-                }
-            }
-        }
-    }
-
-    .list-item-indicator-content 
-    { 
         padding-left: 80px;
         text-align: right;
-        font-size: 0.6em;
-        font-weight: bold;
 
-        > span > img
-        { 
-          width: 24px;
-          height:24px;
-          margin: 2px;
-          font-size: 0.6em;
-          font-weight: normal;
+        > span.disabled
+        {
+            color: @black-darker;
+        }
 
+        > span
+        {
+            margin: 0 3px 0 3px;
+            color: @yellow-darker;
+
+            > img
+            {
+                width: 24px;
+                height:24px;
+            }
         }
     }
 
     .list-item-footer
     {
-        height: 28px;
+        overflow: hidden;
+        max-height: 28px;
         margin: 5px 0 0;
     }
 
@@ -1593,17 +1497,6 @@ td.entry-table-description {
                 position: relative !important;
                 top: 0px !important;
                 width: 24px;
-            }
-        }
-    }
-
-    .list-item-footer
-    {
-        > .button-unSelected
-        {
-            > span
-            {
-                background-image: url(../images/icons/Browse_Next_24.png);
             }
         }
     }
@@ -1659,51 +1552,6 @@ td.entry-table-description {
     color: white;
 }
 
-.color-default
-{
-    background-color: @orange-darker !important;
-    color: white !important;
-}
-.color-account
-{
-    background-color: #0066FF !important;
-    color: white !important;
-}
-.color-contact
-{
-    background-color: #3366FF !important;
-    color: white !important;
-}
-.color-activity
-{
-    background-color: #6600FF !important;
-    color: white !important;
-}
-.color-opportunity
-{
-    background-color: @orange-darker !important;
-    color: white !important;
-}
-.color-ToDo
-{
-    background-color: @orange-darker !important;
-    color: white !important;
-}
-.color-Meeting
-{
-    background-color: #0054a6 !important;
-    color: white !important;
-}
-.color-PhoneCall
-{
-    background-color: #128b0c !important;
-    color: white !important;
-}
-.color-Personal
-{
-    background-color: #5e00a6 !important;
-    color: white !important;
-}
 .indicator_Important
 {
     background-color:#FFFFFF !important;
@@ -1723,7 +1571,7 @@ td.entry-table-description {
 .chart-hash 
 {
     padding: 10px 0 10px 5px;
-    border-left: 5px solid @blue3-darker;
+    border-left: 5px solid @blue1-darker;
     margin: 2px 0 0 2px;
     font-size: @font-size-large;
     font-weight: bold;
@@ -1737,7 +1585,7 @@ td.entry-table-description {
     width: 28px;
     line-height: 28px;
     text-align: center;
-    background: @gray5-lighter;
+    background: @gray2-lighter;
     text-shadow: 0px 1px 0px #fff;
     font-size:0.8em;
     font-weight: bold;

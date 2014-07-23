@@ -61,19 +61,27 @@ define('Mobile/SalesLogix/Views/History/Edit', [
         querySelect: [
             'AccountId',
             'AccountName',
+            'Category',
+            'ModifyDate',
+            'CompletedDate',
             'ContactId',
             'ContactName',
+            'CompletedUser',
             'Description',
-            'LongNotes',
+            'Duration',
             'Notes',
+            'LongNotes',
             'OpportunityId',
             'OpportunityName',
+            'Priority',
+            'StartDate',
             'TicketId',
             'TicketNumber',
-            'Type',
             'LeadId',
             'LeadName',
-            'StartDate'
+            'Timeless',
+            'Type',
+            'UserName'
         ],
         existsRE: /^[\w]{12}$/,
         init: function() {
@@ -475,7 +483,8 @@ define('Mobile/SalesLogix/Views/History/Edit', [
                             applyTo: '.',
                             valueKeyProperty: 'AccountId',
                             valueTextProperty: 'AccountName',
-                            view: 'account_related'
+                            view: 'account_related',
+                            validator: validator.exists
                         }, {
                             dependsOn: 'Account',
                             label: this.contactText,

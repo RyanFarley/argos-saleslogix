@@ -374,8 +374,29 @@ define('Mobile/SalesLogix/Views/Activity/Edit', [
             }
         },
         onLeaderChange: function(value, field) {
-            var userId = field.getValue();
-            this.fields['UserId'].setValue(userId && userId['$key']);
+            var user = field.getValue(),
+                key,
+                resourceId = '';
+
+            key = user['$key'];
+
+            // The key is a composite key on activityresourceviews endpoint.
+            // The format is 'ResourceId-AccessId'.
+            // The feed does include these as seperate fields, but we need to keep the $key/$descriptor format for doing
+            // the PUT to the activities endpoint. We will convert the composite key to something the activities endpoint will understand.
+            if (key) {
+                key = key.split('-');
+                resourceId = key[0];
+                if (resourceId) {
+                    this.fields['UserId'].setValue(resourceId);
+
+                    // Set back to a single $key so the PUT request payload is not messed up
+                    this.fields['Leader'].setValue({
+                        '$key': resourceId,
+                        '$descriptor': user['$descriptor']
+                    });
+                }
+            }
         },
         onAccountChange: function(value, field) {
             var fields, entry, phoneField;
@@ -390,6 +411,11 @@ define('Mobile/SalesLogix/Views/Activity/Edit', [
                         fields[f].currentSelection['Account']['$key'] != (value['AccountId'] || value['key'])) {
 
                         fields[f].setValue(false);
+                    }
+
+                    // No way to determine if the field is part of the changed account, clear it
+                    if (!fields[f].currentSelection) {
+                        fields[f].setValue(null);
                     }
 
                 } else {
@@ -1100,11 +1126,8 @@ define('Mobile/SalesLogix/Views/Activity/Edit', [
                     property: 'Leader',
                     include: true,
                     type: 'lookup',
-                    textProperty: 'UserInfo',
-                    textTemplate: template.nameLF,
                     requireSelection: true,
-                    view: 'user_list',
-                    where: 'Type ne "Template" and Type ne "Retired"'
+                    view: 'calendar_access_list'
                 }, {
                     label: this.longNotesText,
                     noteProperty: false,
@@ -1138,7 +1161,12 @@ define('Mobile/SalesLogix/Views/Activity/Edit', [
                     property: 'Contact',
                     type: 'lookup',
                     emptyText: '',
-                    applyTo: '.',
+                    applyTo: function(payload, value) {
+                        if (value === null) {
+                            payload[this.valueKeyProperty] = null;
+                            payload[this.valueTextProperty] = null;
+                        }
+                    },
                     valueKeyProperty: 'ContactId',
                     valueTextProperty: 'ContactName',
                     view: 'contact_related',
@@ -1152,7 +1180,12 @@ define('Mobile/SalesLogix/Views/Activity/Edit', [
                     property: 'Opportunity',
                     type: 'lookup',
                     emptyText: '',
-                    applyTo: '.',
+                    applyTo: function(payload, value) {
+                        if (value === null) {
+                            payload[this.valueKeyProperty] = null;
+                            payload[this.valueTextProperty] = null;
+                        }
+                    },
                     valueKeyProperty: 'OpportunityId',
                     valueTextProperty: 'OpportunityName',
                     view: 'opportunity_related',
@@ -1166,7 +1199,12 @@ define('Mobile/SalesLogix/Views/Activity/Edit', [
                     property: 'Ticket',
                     type: 'lookup',
                     emptyText: '',
-                    applyTo: '.',
+                    applyTo: function(payload, value) {
+                        if (value === null) {
+                            payload[this.valueKeyProperty] = null;
+                            payload[this.valueTextProperty] = null;
+                        }
+                    },
                     valueKeyProperty: 'TicketId',
                     valueTextProperty: 'TicketNumber',
                     view: 'ticket_related',

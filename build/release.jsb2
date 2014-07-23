@@ -173,6 +173,10 @@
           "path": "../src"
         },
         {
+          "text": "GroupUtility.js",
+          "path": "../src"
+        },
+        {
           "text": "Aggregate.js",
           "path": "../src"
         },
@@ -286,6 +290,10 @@
         },
         {
           "text": "_SpeedSearchRightDrawerListMixin.js",
+          "path": "../src/Views"
+        }, 
+		{
+          "text": "_GroupListMixin.js",
           "path": "../src/Views"
         },
         {
@@ -433,6 +441,10 @@
           "path": "../src/Views/Event"
         },
         {
+          "text": "Selector.js",
+          "path": "../src/Views/Groups"
+        },
+        {
           "text": "List.js",
           "path": "../src/Views/Lead"
         },
@@ -550,6 +562,10 @@
         },
         {
           "text": "List.js",
+          "path": "../src/Views/User"
+        },
+        {
+          "text": "CalendarAccessList.js",
           "path": "../src/Views/User"
         },
         {

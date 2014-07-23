@@ -35,11 +35,12 @@ define('Mobile/SalesLogix/Fields/PicklistField', [
 
     var control = declare('Mobile.SalesLogix.Fields.PicklistField', [LookupField], {
         picklist: false,
-        orderBy: 'number asc',
+        orderBy: 'text asc',
         storageMode: 'text',
         requireSelection: false,
         valueKeyProperty: false,
         valueTextProperty: false,
+        iconClass: 'fa fa-ellipsis-h fa-lg',
 
         constructor: function(options) {
             switch (this.storageMode) {
@@ -140,10 +141,12 @@ define('Mobile/SalesLogix/Fields/PicklistField', [
                 options.tools = {
                     tbar: [{
                             id: 'complete',
+                            cls: 'fa fa-check fa-fw fa-lg',
                             fn: this.complete,
                             scope: this
                         }, {
                             id: 'cancel',
+                            cls: 'fa fa-ban fa-fw fa-lg',
                             side: 'left',
                             fn: ReUI.back,
                             scope: ReUI
